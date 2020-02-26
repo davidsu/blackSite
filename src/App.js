@@ -1,5 +1,6 @@
 import React from 'react'
 import WalkmeUrl from './WalkmeUrl'
+import SnippetSelector from './SnippetSelector'
 import './App.css';
 class App extends React.Component {
   constructor() {
@@ -7,18 +8,23 @@ class App extends React.Component {
     this.state = { snippet: window.localStorage.getItem('snippet') || '' }
     this.inputChanged = event => this.setState({ snippet: event.target.value })
     this.loadWalkMe = this.loadWalkMe.bind(this)
+    this.newSnippet = this.newSnippet.bind(this)
   }
 
   loadWalkMe() {
-    debugger
     const snippet = this.state.snippet.replace(/<script.*?>(.*)<\/script>/, '$1')
     window.localStorage.setItem('snippet', snippet)
     this.setState({ snippet })
+    window._walkMe?.removeWalkMe?.() //eslint-disable-line
     eval(snippet) //eslint-disable-line
   }
 
   componentDidMount() {
     this.btn.focus()
+  }
+
+  newSnippet(snippet) {
+      this.setState({snippet}, this.loadWalkMe)
   }
 
   render() {
@@ -40,6 +46,7 @@ class App extends React.Component {
             onClick={this.loadWalkMe}>LOAD WALKME</button>
         </div>
         <WalkmeUrl/>
+        <SnippetSelector onChange={this.newSnippet} value={this.state.snippet} />
       </div>
     )
   }

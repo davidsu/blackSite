@@ -1,11 +1,6 @@
 import React from 'react'
+import { sources } from './consts'
 
-const sources = {
-    production: '',
-    static: 'https://localhost/mt/dist/maketutorial_lib.js',
-    webpack: 'https://localhost:9090/player/dist/maketutorial_lib.js',
-    'webpack:9091': 'https://localhost:9091/player/dist/maketutorial_lib.js'
-}
 const walkmeCustomeLibUrl = 'walkmeCustomeLibUrl'
 const urlSrc = localStorage.getItem('walkmeCustomeLibUrl') || 'production'
 const getKey = () => {
