@@ -25,7 +25,7 @@ class WalkMeUrl extends React.Component {
 
     makeRadio() {
         return Object.keys(sources).map(value => ( 
-            <div key={value} onClick={() => this.change(value)}>
+            <div key={value} onClick={() => this.change(value)} style={{cursor:"default"}}>
                 <input 
                     style={{marginTop: '15px', marginRight: '8px'}}
                     type="radio"
