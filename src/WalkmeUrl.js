@@ -5,14 +5,12 @@ import {invert} from 'lodash'
 const walkmeCustomeLibUrl = 'walkmeCustomeLibUrl'
 const urlSrc = localStorage.getItem('walkmeCustomeLibUrl') || 'production'
 class WalkMeUrl extends React.Component {
-    constructor() {
-        super()
+    constructor(props) {
+        super(props)
         this.state = {key: invert(sources)[urlSrc] || 'production'}
-        this.change = this.change.bind(this)
-        this.makeRadio = this.makeRadio.bind(this)
     }
-    change(e) {
-        const key = e.target.value
+    change(value) {
+        const key = value
         const urlSrc = sources[key]
         if(key === 'production') {
             localStorage.removeItem(walkmeCustomeLibUrl)
@@ -22,17 +20,18 @@ class WalkMeUrl extends React.Component {
             console.log('you are on localLib ' + urlSrc)
         }
         this.setState({key})
+        this.props.onChange()
     }
 
     makeRadio() {
         return Object.keys(sources).map(value => ( 
-            <div key={value}>
+            <div key={value} onClick={() => this.change(value)}>
                 <input 
                     style={{marginTop: '15px', marginRight: '8px'}}
                     type="radio"
                     name="wm_source"
-                    onChange={this.change}
                     value={value}
+                    onChange={() => {}}
                     checked={value === this.state.key}
                 />
                 {value}

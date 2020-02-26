@@ -2,30 +2,38 @@ import React from 'react'
 import WalkmeUrl from './WalkmeUrl'
 import SnippetSelector from './SnippetSelector'
 import './App.css';
+
+let reloadWalkmeCountDown = 6
+function loadWalkMe(snippet) {
+    const fixedSnippet = snippet.replace(/<script.*?>(.*)<\/script>/, '$1')
+    window.localStorage.setItem('snippet', fixedSnippet)
+    if(!(--reloadWalkmeCountDown)) location.reload() //eslint-disable-line no-restricted-globals
+    window._walkMe?.removeWalkMe?.() //eslint-disable-line
+    try {
+      eval(fixedSnippet) //eslint-disable-line no-eval
+    } catch {}
+    return fixedSnippet
+}
 class App extends React.Component {
   constructor() {
     super()
-    this.state = { snippet: window.localStorage.getItem('snippet') || '' }
+    const snippet = loadWalkMe(window.localStorage.getItem('snippet') || '')
+    this.state = { snippet }
     this.inputChanged = event => this.setState({ snippet: event.target.value })
     this.loadWalkMe = this.loadWalkMe.bind(this)
-    this.newSnippet = this.newSnippet.bind(this)
+    this.newSnippet = this.onSnippetChange.bind(this)
   }
 
   loadWalkMe() {
-    const snippet = this.state.snippet.replace(/<script.*?>(.*)<\/script>/, '$1')
-    window.localStorage.setItem('snippet', snippet)
-    this.setState({ snippet })
-    window._walkMe?.removeWalkMe?.() //eslint-disable-line
-    try {
-      eval(snippet) //eslint-disable-line no-eval
-    } catch {}
+      const snippet = loadWalkMe(this.state.snippet)
+      this.setState({ snippet })
   }
 
   componentDidMount() {
     this.btn.focus()
   }
 
-  newSnippet(snippet) {
+  onSnippetChange(snippet) {
       this.setState({snippet}, this.loadWalkMe)
   }
 
@@ -47,8 +55,8 @@ class App extends React.Component {
             ref={(btn) => this.btn = btn}
             onClick={this.loadWalkMe}>LOAD WALKME</button>
         </div>
-        <WalkmeUrl/>
-        <SnippetSelector onChange={this.newSnippet} value={this.state.snippet} />
+        <WalkmeUrl onChange={() => loadWalkMe(this.state.snippet)}/>
+        <SnippetSelector onChange={this.onSnippetChange} value={this.state.snippet} />
       </div>
     )
   }
