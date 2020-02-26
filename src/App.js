@@ -1,26 +1,48 @@
-import React from 'react';
-import logo from './logo.svg';
+import React from 'react'
+import WalkmeUrl from './WalkmeUrl'
 import './App.css';
+class App extends React.Component {
+  constructor() {
+    super()
+    this.state = { snippet: window.localStorage.getItem('snippet') || '' }
+    this.inputChanged = event => this.setState({ snippet: event.target.value })
+    this.loadWalkMe = this.loadWalkMe.bind(this)
+  }
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+  loadWalkMe() {
+    debugger
+    const snippet = this.state.snippet.replace(/<script.*?>(.*)<\/script>/, '$1')
+    window.localStorage.setItem('snippet', snippet)
+    this.setState({ snippet })
+    eval(snippet) //eslint-disable-line
+  }
+
+  componentDidMount() {
+    this.btn.focus()
+  }
+
+  render() {
+    return (
+      <div className="App">
+        <h1>Davidsu Black Site</h1>
+        <div >
+          <textarea
+            id="input"
+            onFocus={({ target }) => target.select()}
+            name="snippet"
+            value={this.state.snippet}
+            onChange={this.inputChanged}></textarea>
+        </div>
+        <div>
+          <button
+            className="btn"
+            ref={(btn) => this.btn = btn}
+            onClick={this.loadWalkMe}>LOAD WALKME</button>
+        </div>
+        <WalkmeUrl/>
+      </div>
+    )
+  }
 }
 
 export default App;
