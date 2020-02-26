@@ -16,7 +16,9 @@ class App extends React.Component {
     window.localStorage.setItem('snippet', snippet)
     this.setState({ snippet })
     window._walkMe?.removeWalkMe?.() //eslint-disable-line
-    eval(snippet) //eslint-disable-line
+    try {
+      eval(snippet) //eslint-disable-line no-eval
+    } catch {}
   }
 
   componentDidMount() {

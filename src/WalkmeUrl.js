@@ -1,18 +1,13 @@
 import React from 'react'
 import { sources } from './consts'
+import {invert} from 'lodash'
 
 const walkmeCustomeLibUrl = 'walkmeCustomeLibUrl'
 const urlSrc = localStorage.getItem('walkmeCustomeLibUrl') || 'production'
-const getKey = () => {
-    for(const [key, value] of Object.entries(sources)) {
-        if(value === urlSrc) return key
-    }
-    return 'production'
-}
 class WalkMeUrl extends React.Component {
     constructor() {
         super()
-        this.state = {key: getKey()}
+        this.state = {key: invert(sources)[urlSrc] || 'production'}
         this.change = this.change.bind(this)
         this.makeRadio = this.makeRadio.bind(this)
     }
@@ -31,7 +26,7 @@ class WalkMeUrl extends React.Component {
 
     makeRadio() {
         return Object.keys(sources).map(value => ( 
-            <div>
+            <div key={value}>
                 <input 
                     style={{marginTop: '15px', marginRight: '8px'}}
                     type="radio"
