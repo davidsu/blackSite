@@ -2,11 +2,12 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import App from './App';
 import {store} from './store'
+import {loadWalkMe} from './core'
 import { Provider } from 'react-redux'
 
-window.boo=1
 ReactDOM.render(
     (<Provider store={store}>
         <App />
     </Provider>)
     , document.getElementById('root'));
+loadWalkMe(store.getState().snippet)
