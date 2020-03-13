@@ -1,16 +1,13 @@
 import React from 'react'
 import WalkmeUrl from '../WalkmeUrl'
 import SnippetSelector from '../SnippetSelector'
+import LoadWalkMeButton from '../LoadWalkMeButton'
 import './App.css';
 
 class App extends React.Component {
   constructor(props) {
     super(props)
     this.inputChanged = event => this.props.setSnippet(event.target.value)
-  }
-
-  componentDidMount() {
-    this.btn.focus()
   }
 
   render() {
@@ -27,11 +24,8 @@ class App extends React.Component {
             onChange={this.inputChanged}></textarea>
         </div>
         <div>
-          <button
-            className="btn"
-            data-testid="loadWalkMeButton"
-            ref={(btn) => this.btn = btn}
-            onClick={() => this.props.loadWalkMe(this.props.snippet)}>LOAD WALKME</button>
+      <LoadWalkMeButton {...this.props}/>
+          
         </div>
         <WalkmeUrl />
         <SnippetSelector />

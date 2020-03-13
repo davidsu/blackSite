@@ -1,6 +1,6 @@
 html {
   height: 100%; 
-  background-color: black;
+  background-color: #121212;
   color: gray
 }
 
@@ -9,18 +9,6 @@ h1 {
   text-align: center;
   font-size: 4em
 }
-
-.btn {
-    border: none;
-    background-color: inherit;
-    padding: 14px 28px;
-    font-size: 16px;
-    cursor: pointer;
-    display: inline-block;
-    color: #AD4A01;
-    font-weight: bold;
-}
-.btn:hover {background: #2f2f2f;}
 
 textarea {
   width: 45%;
