@@ -5,6 +5,7 @@ function makeRadio(props) {
   return Object.keys(sources).map(value => (
     <div
       key={value}
+      data-testid={`${value}TestId`}
       onClick={() => props.onChangeWalkmeUrl(value)}
       style={{ cursor: "default" }}
     >

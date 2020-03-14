@@ -32,10 +32,12 @@ module.exports = {
 	'no-plusplus': 'off',
     'no-console': 'off',
 	'react/destructuring-assignment': 'off',
-	'react/prop-types': 'off'
+	'react/prop-types': 'off',
+	'jsx-a11y/no-static-element-interactions': 'off',
+	'jsx-a11y/click-events-have-key-events': 'off'
   },
   overrides: [{
-	files: ['**/*.test.js', '**/*.testkit.js'],
+	files: ['**/*.test.js', '**/*.testkit.jsx'],
 	env: {
 	  jest: true
 	},
