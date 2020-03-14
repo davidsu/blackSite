@@ -13,7 +13,7 @@
     "content_scripts": [
         {
             "js": [
-                "./dist/runInPage.js"
+                "runInPage.js"
             ],
             "matches": [
                 "http://*/*",
@@ -27,7 +27,7 @@
         "32": "/public/favicon-32x32.png"
     },
     "background": {
-      "scripts": ["./dist/background.js"],
+      "scripts": ["background.js"],
       "persistent": false
     },
     "manifest_version": 2,

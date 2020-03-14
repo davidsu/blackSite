@@ -1,13 +1,16 @@
+const HtmlWebPackPlugin = require("html-webpack-plugin")
+const CopyWebpackPlugin = require("copy-webpack-plugin")
+const path = require("path")
+
 module.exports = {
   mode: "development",
   devServer: {
     writeToDisk: true,
+    contentBase: path.join(__dirname, "/dist"),
     port: 3000,
     hot: true,
     https: true,
-    disableHostCheck: true,
-    headers: { "Access-Control-Allow-Origin": "*" }
-
+    disableHostCheck: true
   },
   devtool: "inline-source-map",
   optimization: {
@@ -30,9 +33,25 @@ module.exports = {
         use: {
           loader: "babel-loader"
         }
+      },
+      {
+        test: /\.html$/,
+        use: [
+          {
+            loader: "html-loader"
+          }
+        ]
       }
     ]
   },
+  plugins: [
+    new HtmlWebPackPlugin({
+      template: "./src/index.html",
+      filename: "./index.html",
+      chunks: ["main"]
+    }),
+    new CopyWebpackPlugin([{ from: "public", to: "public" }, './manifest.json'])
+  ],
   resolve: {
     extensions: [".js", ".jsx"]
   }
