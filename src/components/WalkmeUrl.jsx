@@ -1,32 +1,30 @@
 import React from "react"
-import { sources } from "../consts"
+import TextField from "@material-ui/core/TextField"
+import Autocomplete from "@material-ui/lab/Autocomplete"
 
-function makeRadio(props) {
-  return Object.keys(sources).map(value => (
-    <div
-      key={value}
-      data-testid={`${value}TestId`}
-      onClick={() => props.onChangeWalkmeUrl(value)}
-      style={{ cursor: "default" }}
-    >
-      <input
-        style={{ marginTop: "15px", marginRight: "8px" }}
-        type="radio"
-        name="wm_source"
-        value={value}
-        onChange={() => {}}
-        checked={value === props.walkmeUrlKey}
+const WalkMeUrl = ({ onChangeWalkmeUrl, walkmeUrlKey, walkmeUrlSources }) => (
+  <Autocomplete
+    id="combo-box-demo"
+    options={walkmeUrlSources}
+    getOptionLabel={option => option}
+    size="small"
+    style={{ width: 300, margin: "0 auto" }}
+    onChange={(e, value) => {
+      onChangeWalkmeUrl(value)
+    }}
+    value={walkmeUrlKey}
+    renderInput={params => (
+      <TextField
+        onChange={({ target }) => {
+          onChangeWalkmeUrl(target.value)
+        }}
+        {...params}
+        size="small"
+        label="Lib Version"
+        variant="outlined"
       />
-      {value}
-    </div>
-  ))
-}
-
-// todo missing load walkme
-const WalkMeUrl = props => (
-  <div style={{ textAlign: "left", width: "140px", margin: "auto" }}>
-    {makeRadio(props)}
-  </div>
+    )}
+  />
 )
 
 export default WalkMeUrl

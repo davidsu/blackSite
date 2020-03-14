@@ -3,9 +3,13 @@ module.exports = {
   devServer: {
     writeToDisk: true,
     port: 3000,
-    hot: true
+    hot: true,
+    https: true,
+    disableHostCheck: true,
+    headers: { "Access-Control-Allow-Origin": "*" }
+
   },
-  devtool: "source-map",
+  devtool: "inline-source-map",
   optimization: {
     minimize: false
   },

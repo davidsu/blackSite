@@ -1,5 +1,6 @@
 import { store } from "./store"
 import { SET_SNIPPET } from "./store/actionTypes"
+import { sources } from "./consts"
 
 const walkmeCustomeLibUrl = "walkmeCustomeLibUrl"
 let reloadWalkmeCountDown = 6
@@ -46,16 +47,23 @@ const shouldReloadWalkme = (newState, oldState) =>
   !isExtension() &&
   (newState.snippet !== oldState.snippet ||
     newState.walkmeUrl !== oldState.walkmeUrl)
+
+function getRealWalkmeUrl(libVersion) {
+  if (/^\d{8}-\d{6}/.test(libVersion)) {
+    return `https://cdn.walkme.com/player/lib/walkme_lib_${libVersion}.js`
+  }
+  return sources[libVersion]
+}
+
 let state = {}
 store.subscribe(() => {
-  const newState = store.getState()
+  const newState = store.getState() || {}
   if (newState.walkmeUrl !== state.walkmeUrl) {
-    if (!newState.walkmeUrl || newState.walkmeUrl === "production") {
+    const realUrl = getRealWalkmeUrl(newState.walkmeUrl)
+    if (!realUrl || realUrl === "production") {
       removeLocalStorage(walkmeCustomeLibUrl)
-      console.log("you are not on local lib")
     } else {
-      setLocalStorage(walkmeCustomeLibUrl, newState.walkmeUrl)
-      console.log(`you are on localLib ${newState.walkmeUrl}`)
+      setLocalStorage(walkmeCustomeLibUrl, realUrl)
     }
   }
   if (newState.snippet !== state.snippet) {

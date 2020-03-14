@@ -3,6 +3,7 @@ html {
     background-color: #121212;
     color: gray;
     min-width: 400px;
+    min-height: 500px;
 }
 
 h1 {

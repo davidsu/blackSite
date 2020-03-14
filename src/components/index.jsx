@@ -1,20 +1,17 @@
 import { connect } from "react-redux"
-import { invert } from "lodash"
-import { sources } from "../consts"
 import { SET_WALKME_URL } from "../store/actionTypes"
 import WalkmeUrlComponent from "./WalkmeUrl"
 import LoadWalkmeBtn from "./LoadWalkmeBtn"
 import SnippetSelectorComponent from "./SnippetSelector"
 import TextArea from "./TextArea"
 
-function mapWalkmeUrlToKey({ walkmeUrl }) {
-  const walkmeUrlKey = invert(sources)[walkmeUrl] || "production"
-  return { walkmeUrlKey }
+function mapWalkmeUrlToKey({ walkmeUrl, walkmeUrlSources }) {
+  const walkmeUrlKey = walkmeUrl
+  return { walkmeUrlKey, walkmeUrlSources }
 }
 function mapDispatchToChangeWalkmeUrl(dispatch) {
   function onChangeWalkmeUrl(key) {
-    const urlSrc = sources[key]
-    dispatch({ type: SET_WALKME_URL, payload: urlSrc })
+    dispatch({ type: SET_WALKME_URL, payload: key })
   }
   return { onChangeWalkmeUrl }
 }
