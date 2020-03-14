@@ -1,4 +1,10 @@
 module.exports = {
+    mode: 'development',
+    devServer: {
+        writeToDisk: true,
+        port: 3000,
+        hot: true,
+    },
     devtool: 'source-map',
     optimization: {
         minimize: false,
