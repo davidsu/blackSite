@@ -30,7 +30,9 @@ module.exports = {
 	'prettier/prettier': 'error',
 	'import/prefer-default-export': 'off',
 	'no-plusplus': 'off',
-    'no-console': 'off'
+    'no-console': 'off',
+	'react/destructuring-assignment': 'off',
+	'react/prop-types': 'off'
   },
   overrides: [{
 	files: ['**/*.test.js', '**/*.testkit.js'],
