@@ -37,13 +37,4 @@ module.exports = {
 	'jsx-a11y/click-events-have-key-events': 'off',
 	'react/jsx-props-no-spreading': 'off'
   },
-  overrides: [{
-	files: ['**/*.test.js', '**/*.testkit.jsx'],
-	env: {
-	  jest: true
-	},
-	rules: {
-	  'import/no-extraneous-dependencies': 'off'
-	}
-  }]
 };

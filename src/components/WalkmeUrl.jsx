@@ -7,6 +7,7 @@ const WalkMeUrl = ({ onChangeWalkmeUrl, walkmeUrlKey, walkmeUrlSources }) => (
     id="combo-box-demo"
     options={walkmeUrlSources}
     getOptionLabel={option => option}
+    data-testid="WalkMeUrl"
     size="small"
     style={{ width: 300, margin: "0 auto" }}
     onChange={(e, value) => {

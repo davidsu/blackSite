@@ -50,7 +50,7 @@ module.exports = {
       filename: "./index.html",
       chunks: ["main"]
     }),
-    new CopyWebpackPlugin([{ from: "public", to: "public" }, './manifest.json'])
+    new CopyWebpackPlugin([{ from: "public", to: "public" }, "./manifest.json"])
   ],
   resolve: {
     extensions: [".js", ".jsx"]

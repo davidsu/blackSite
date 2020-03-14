@@ -11,3 +11,5 @@ export const snippetFiles = {
   "end user IDP":
     "(function() {var walkme = document.createElement('script'); walkme.type = 'text/javascript'; walkme.async = true; walkme.src = 'https://cdn.walkmeqa.com/users/81eaa8a0981f4497959fa62e1b9264f3/test/walkme_81eaa8a0981f4497959fa62e1b9264f3_https.js'; var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(walkme, s); window._walkmeConfig = {smartLoad:true}; })();"
 }
+
+export const customLibStorageKey = "walkmeCustomeLibUrl"

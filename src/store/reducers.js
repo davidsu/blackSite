@@ -13,7 +13,13 @@ const reducer = (state = getInitialState(), action) => {
         snippet: action.payload.replace(/<script.*?>(.*)<\/script>/, "$1")
       }
     case SET_WALKME_URL:
-      return { ...state, walkmeUrl: action.payload, walkmeUrlSources: [...new Set([action.payload, ...Object.keys(sources)])], }
+      return {
+        ...state,
+        walkmeUrl: action.payload,
+        walkmeUrlSources: [
+          ...new Set([action.payload, ...Object.keys(sources)])
+        ]
+      }
   }
   return state
 }
