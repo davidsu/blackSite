@@ -5,5 +5,5 @@ import { connect } from 'react-redux'
 function mapStateToProps(state) {
     return state
 }
-const mapDispatchToProps = () => ({setSnippet, loadWalkMe})
+const mapDispatchToProps = () => ({setSnippet})
 export default connect(mapStateToProps, mapDispatchToProps)(App)

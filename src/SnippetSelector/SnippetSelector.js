@@ -11,7 +11,6 @@ export default ({value, onChange}) => (
         className="dropdown-select" 
         value={invert(snippetFiles)[value] || ''} 
         onChange={e => {
-            debugger
           onChange(snippetFiles[e.target.value] || '')
         }}>
           <option value="">Select snippet file</option>

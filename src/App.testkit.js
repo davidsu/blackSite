@@ -4,8 +4,10 @@ import App from './App';
 import { createStore } from 'redux'
 import { reducer } from './store/reducers'
 import { Provider } from 'react-redux'
+import {store} from './store'
+import {INITIALIZE} from './store/actionTypes'
 export default ({snippet = 'dummy', walkmeUrl = 'production'} = {}) => {
-  const store = createStore(reducer, {snippet, walkmeUrl})
+  store.dispatch({type: INITIALIZE, payload: {snippet, walkmeUrl}})
   const rendered = render(<Provider store={store}><App /></Provider>);
   const getLoadWalkMeButton = () => rendered.getByTestId('loadWalkMeButton')
   const getSnippetTextArea = () => rendered.getByTestId('snippetTextInput')

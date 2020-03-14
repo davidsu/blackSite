@@ -1,6 +1,8 @@
 import React from 'react'
 import WalkmeUrl from '../WalkmeUrl'
 import SnippetSelector from '../SnippetSelector'
+import LoadWalkmeBtn from '../LoadWalkmeBtn'
+import {isExtension} from '../core'
 import './App.css';
 
 class App extends React.Component {
@@ -9,14 +11,11 @@ class App extends React.Component {
     this.inputChanged = event => this.props.setSnippet(event.target.value)
   }
 
-  componentDidMount() {
-    this.btn.focus()
-  }
-
   render() {
+    console.log(this.props.snippet)
     return (
       <div className="App">
-        <h1>Davidsu Black Site</h1>
+      {!isExtension() && <h1>Davidsu Black Site</h1>}
         <div >
           <textarea
             id="input"
@@ -27,11 +26,7 @@ class App extends React.Component {
             onChange={this.inputChanged}></textarea>
         </div>
         <div>
-          <button
-            className="btn"
-            data-testid="loadWalkMeButton"
-            ref={(btn) => this.btn = btn}
-            onClick={() => this.props.loadWalkMe(this.props.snippet)}>LOAD WALKME</button>
+          <LoadWalkmeBtn/>
         </div>
         <WalkmeUrl />
         <SnippetSelector />
