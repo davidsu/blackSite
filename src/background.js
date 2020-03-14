@@ -1,6 +1,8 @@
-chrome.declarativeContent.onPageChanged.removeRules(undefined, function() {
-    chrome.declarativeContent.onPageChanged.addRules([{
-        conditions: [new chrome.declarativeContent.PageStateMatcher()],
-        actions: [new chrome.declarativeContent.ShowPageAction()]
-    }]);
+chrome.declarativeContent.onPageChanged.removeRules(undefined, () => {
+  chrome.declarativeContent.onPageChanged.addRules([
+    {
+      conditions: [new chrome.declarativeContent.PageStateMatcher()],
+      actions: [new chrome.declarativeContent.ShowPageAction()]
+    }
+  ])
 })

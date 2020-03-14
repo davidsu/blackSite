@@ -1,9 +1,9 @@
-import React from 'react'
-import WalkmeUrl from '../WalkmeUrl'
-import SnippetSelector from '../SnippetSelector'
-import LoadWalkmeBtn from '../LoadWalkmeBtn'
-import {isExtension} from '../core'
-import './App.css';
+import React from "react"
+import WalkmeUrl from "../WalkmeUrl"
+import SnippetSelector from "../SnippetSelector"
+import LoadWalkmeBtn from "../LoadWalkmeBtn"
+import { isExtension } from "../core"
+import "./App.css"
 
 class App extends React.Component {
   constructor(props) {
@@ -15,18 +15,19 @@ class App extends React.Component {
     console.log(this.props.snippet)
     return (
       <div className="App">
-      {!isExtension() && <h1>Davidsu Black Site</h1>}
-        <div >
+        {!isExtension() && <h1>Davidsu Black Site</h1>}
+        <div>
           <textarea
             id="input"
             onFocus={({ target }) => target.select()}
             data-testid="snippetTextInput"
             name="snippet"
             value={this.props.snippet}
-            onChange={this.inputChanged}></textarea>
+            onChange={this.inputChanged}
+          />
         </div>
         <div>
-          <LoadWalkmeBtn/>
+          <LoadWalkmeBtn />
         </div>
         <WalkmeUrl />
         <SnippetSelector />
@@ -35,4 +36,4 @@ class App extends React.Component {
   }
 }
 
-export default App;
+export default App

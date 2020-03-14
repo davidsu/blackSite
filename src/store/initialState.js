@@ -1,6 +1,6 @@
 const getInitialState = () => ({
-    snippet: window.localStorage.getItem('snippet') || '',
-    walkmeUrl: localStorage.getItem('walkmeCustomeLibUrl') || 'production'
+  snippet: window.localStorage.getItem("snippet") || "",
+  walkmeUrl: localStorage.getItem("walkmeCustomeLibUrl") || "production"
 })
 
-export {getInitialState}
+export { getInitialState }

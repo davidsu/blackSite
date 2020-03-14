@@ -1,3 +1,3 @@
-import LoadWalkmeBtn from './LoadWalkmeBtn'
-export default LoadWalkmeBtn
+import LoadWalkmeBtn from "./LoadWalkmeBtn"
 
+export default LoadWalkmeBtn
