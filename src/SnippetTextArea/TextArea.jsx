@@ -1,4 +1,5 @@
 import React from "react"
+import TextareaAutosize from "@material-ui/core/TextareaAutosize"
 
 class TextArea extends React.Component {
   constructor(props) {
@@ -8,17 +9,17 @@ class TextArea extends React.Component {
 
   render() {
     return (
-      <div className="App">
-        <div>
-          <textarea
-            id="input"
-            onFocus={({ target }) => target.select()}
-            data-testid="snippetTextInput"
-            name="snippet"
-            value={this.props.snippet}
-            onChange={this.inputChanged}
-          />
-        </div>
+      <div>
+        <TextareaAutosize
+          id="input"
+          aria-label="empty textarea"
+          placeholder="paste you snippet here"
+          onFocus={({ target }) => target.select()}
+          data-testid="snippetTextInput"
+          name="snippet"
+          value={this.props.snippet}
+          onChange={this.inputChanged}
+        />
       </div>
     )
   }

@@ -1,13 +1,28 @@
 import React from "react"
-import { loadWalkMe } from "../core"
+import Button from "@material-ui/core/Button"
+import { makeStyles } from "@material-ui/core/styles"
 
-export default () => (
-  <button
-    className="btn"
-    data-testid="loadWalkMeButton"
-    autoFocus
-    onClick={loadWalkMe}
-  >
-    LOAD WALKME
-  </button>
-)
+const useStyles = makeStyles(() => ({
+  root: {
+    color: "#AD4A01",
+    padding: "14px 28px",
+    "font-size": "16px",
+    "&:hover": {
+      backgroundColor: "#2f2f2f"
+    }
+  }
+}))
+
+export default props => {
+  const classes = useStyles()
+  return (
+    <Button
+      className={classes.root}
+      size="large"
+      data-testid="loadWalkMeButton"
+      onClick={() => props.loadWalkMe(props.snippet)}
+    >
+      LOAD WALKME
+    </Button>
+  )
+}
