@@ -1,3 +1,5 @@
+jest.mock("highlight.js/styles/default.css", () => ({}))
+jest.mock("highlight.js/styles/darkula.css", () => ({}))
 global.document.createRange = () => ({
   setStart: () => {},
   setEnd: () => {},

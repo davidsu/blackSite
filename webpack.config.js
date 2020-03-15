@@ -43,12 +43,12 @@ module.exports = {
       { from: "public", to: "public" },
       "./manifest.json"
     ]),
-    new BundleAnalyzerPlugin({
-      generateStatsFile: true,
-      statsFilename: "./bundleanalyzerstats",
-      analyzerMode: "static",
-      openAnalyzer: false
-    })
+    // new BundleAnalyzerPlugin({
+    //   generateStatsFile: true,
+    //   statsFilename: "./bundleanalyzerstats",
+    //   analyzerMode: "static",
+    //   openAnalyzer: false
+    // })
   ],
   resolve: {
     extensions: [".js", ".jsx"]

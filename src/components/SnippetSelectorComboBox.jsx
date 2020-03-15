@@ -1,31 +1,34 @@
 import React from "react"
 import TextField from "@material-ui/core/TextField"
 import Autocomplete from "@material-ui/lab/Autocomplete"
+import invert from "lodash/invert"
+import { setSnippet } from "../core"
+import { snippetFiles } from "../consts"
 
-const WalkMeUrl = ({ onChangeWalkmeUrl, walkmeUrlKey, walkmeUrlSources }) => (
+const TextArea = ({ snippet }) => (
   <Autocomplete
     id="combo-box-demo"
     freeSolo
-    options={walkmeUrlSources}
+    options={Object.keys(snippetFiles)}
     getOptionLabel={option => option}
-    data-testid="WalkMeUrl"
+    data-testid="snippetSelector2"
     size="small"
     onChange={(e, value) => {
-      onChangeWalkmeUrl(value)
+      setSnippet(snippetFiles[value] || "")
     }}
-    value={walkmeUrlKey}
+    value={invert(snippetFiles)[snippet] || ""}
     renderInput={params => (
       <TextField
         onChange={({ target }) => {
-          onChangeWalkmeUrl(target.value)
+          setSnippet(snippetFiles[target.value] || target.value)
         }}
         {...params}
         size="small"
-        label="Lib Version: Paste or Choose"
+        label="Snippet: Paste or Choose"
         variant="outlined"
       />
     )}
   />
 )
 
-export default WalkMeUrl
+export default TextArea

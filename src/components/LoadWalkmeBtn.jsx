@@ -23,7 +23,7 @@ export default () => {
       data-testid="loadWalkMeButton"
       onClick={loadWalkMe}
     >
-      LOAD WALKME
+      (RE)LOAD WALKME
     </Button>
   )
 }

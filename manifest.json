@@ -27,5 +27,5 @@
         "32": "/public/favicon-32x32.png"
     },
     "manifest_version": 2,
-    "content_security_policy": "script-src 'self' 'sha256-GsEAqV68CWexRyx9jqsPuRIlaZ4ZLXPM0Jx0WIfV9cM='; object-src 'self'"
+    "content_security_policy": "script-src 'self' 'sha256-GsEAqV68CWexRyx9jqsPuRIlaZ4ZLXPM0Jx0WIfV9cM=' 'unsafe-eval' https://cdn.jsdelivr.net; object-src 'self'"
   }

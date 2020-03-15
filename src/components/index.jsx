@@ -3,7 +3,6 @@ import { SET_WALKME_URL } from "../store/actionTypes"
 import WalkmeUrlComponent from "./WalkmeUrl"
 import LoadWalkmeBtn from "./LoadWalkmeBtn"
 import SnippetSelectorComponent from "./SnippetSelector"
-import TextArea from "./TextArea"
 
 function mapWalkmeUrlToKey({ walkmeUrl, walkmeUrlSources }) {
   const walkmeUrlKey = walkmeUrl
@@ -22,5 +21,4 @@ const WalkmeUrl = connect(
 
 const mapStateToSnippet = ({ snippet }) => ({ snippet })
 const SnippetSelector = connect(mapStateToSnippet)(SnippetSelectorComponent)
-const SnippetTextArea = connect(mapStateToSnippet)(TextArea)
-export { LoadWalkmeBtn, SnippetSelector, SnippetTextArea, WalkmeUrl }
+export { LoadWalkmeBtn, SnippetSelector, WalkmeUrl }

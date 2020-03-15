@@ -10,6 +10,8 @@
     "@material-ui/core": "^4.9.5",
     "@material-ui/lab": "^4.0.0-alpha.45",
     "@material-ui/styles": "^4.9.0",
+    "highlight.js": "^9.18.1",
+    "js-beautify": "^1.10.3",
     "lodash": "^4.17.15",
     "react": "^16.12.0",
     "react-dom": "^16.12.0",
