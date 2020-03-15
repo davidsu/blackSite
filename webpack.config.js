@@ -5,7 +5,7 @@ const { BundleAnalyzerPlugin } = require("webpack-bundle-analyzer")
 const mode = process.env.NODE_ENV || "production"
 module.exports = {
   mode,
-  devtool: "inline-source-map",
+  devtool: "source-map",
   entry: {
     main: "./src/index.jsx",
     runInPage: "./src/runInPage.js"
