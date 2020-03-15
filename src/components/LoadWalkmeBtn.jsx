@@ -5,7 +5,7 @@ import { loadWalkMe } from "../core"
 export default () => {
   return (
     <Button
-      style={{ width: "45%", marginLeft: "0" }}
+      style={{ width: "50%", marginLeft: "0" }}
       color="primary"
       data-testid="loadWalkMeButton"
       onClick={loadWalkMe}

@@ -24,3 +24,4 @@ export const superScriptLoaderCode = `
 `
 
 export const customLibStorageKey = "walkmeCustomeLibUrl"
+export const qaFeaturesKey = "walkme_qa_features"

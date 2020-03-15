@@ -7,7 +7,7 @@ const result = merge(base, {
   devServer: {
     contentBase: path.join(__dirname, "/dist"),
     writeToDisk: true,
-    port: 3000,
+    port: 5001,
     hot: true,
     https: true,
     disableHostCheck: true

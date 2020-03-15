@@ -4,7 +4,7 @@ import { loadSuperscript } from "../core"
 
 export default () => (
   <Button
-  style={{width: "45%", marginRight:"0"}}
+    style={{width: "50%", marginRight:"0"}}
     color="secondary"
     data-testid="loadSuperscript"
     onClick={loadSuperscript}

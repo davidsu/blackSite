@@ -11,6 +11,7 @@ describe("initialState", () => {
       snippet: "dummySnippet",
       walkmeUrl: "static",
       walkmeUrlSources: Object.keys(sources).sort(),
+      qaFeatures: [],
       customUserSettings: {
         env: null,
         guid: null,
@@ -31,6 +32,7 @@ describe("initialState", () => {
       snippet: "",
       walkmeUrl,
       walkmeUrlSources: [...Object.keys(sources), walkmeUrl].sort(),
+      qaFeatures: [],
       customUserSettings: {
         env: null,
         guid: null,

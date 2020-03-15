@@ -1,6 +1,5 @@
-import { sources, customLibStorageKey } from "./consts"
+import { sources, customLibStorageKey, qaFeaturesKey } from "./consts"
 import { sendMessage, isExtension } from "./extensiontUtils"
-import { store } from "./store"
 
 function getRealWalkmeUrl(libVersion) {
   if (/^\d{8}-\d{6}/.test(libVersion)) {
@@ -33,8 +32,8 @@ function updateLocalStorage(key, value) {
   }
 }
 
-function syncWalkmeUrl(url) {
-  const realUrl = getRealWalkmeUrl(url)
+function syncWalkmeUrl({ walkmeUrl }) {
+  const realUrl = getRealWalkmeUrl(walkmeUrl)
   if (realUrl === "production") {
     removeLocalStorage(customLibStorageKey)
   } else {
@@ -42,21 +41,25 @@ function syncWalkmeUrl(url) {
   }
 }
 
-function syncUserSettings(userSettings) {
-  for (const [key, value] of Object.entries(userSettings)) {
+function syncUserSettings({ customUserSettings }) {
+  for (const [key, value] of Object.entries(customUserSettings)) {
     updateLocalStorage(`walkme_custom_user_settings_${key}`, value)
   }
 }
 
-function syncSnippet(snippet) {
+function syncSnippet({ snippet }) {
   setLocalStorage("snippet", snippet)
 }
 
-function syncStateToLocalStorage() {
-  const state = store.getState()
-  syncWalkmeUrl(state.walkmeUrl)
-  syncSnippet(state.snippet)
-  syncUserSettings(state.customUserSettings)
+function syncQaFeatures({ qaFeatures }) {
+  setLocalStorage(qaFeaturesKey, qaFeatures.join(" "))
+}
+
+function syncStateToLocalStorage(state) {
+  syncWalkmeUrl(state)
+  syncSnippet(state)
+  syncUserSettings(state)
+  syncQaFeatures(state)
 }
 
 export { syncStateToLocalStorage }

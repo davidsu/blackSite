@@ -1,14 +1,16 @@
+import { combineReducers } from "redux"
 import {
   SET_CUSTOM_SETTINGS_URL,
   SET_CUSTOM_SETTINGS_GUID,
   SET_CUSTOM_SETTINGS_ENV,
   INITIALIZE,
   SET_SNIPPET,
-  SET_WALKME_URL
+  SET_WALKME_URL,
+  ADD_QA_FEATURE,
+  DELETE_QA_FEATURE
 } from "./actionTypes"
 import { getInitialState } from "./initialState"
 import { sources } from "../consts"
-// import { combineReducers } from 'redux'
 
 const createReducer = (initialState, reducers) => (
   state = initialState,
@@ -37,9 +39,24 @@ const customUserSettings = createReducer(
     })
   }
 )
+
+const qaFeatures = createReducer(
+  {},
+  {
+    [ADD_QA_FEATURE]: (state, { payload }) =>
+      [...state, ...payload.split(/\s+/)].filter(a => a),
+    [DELETE_QA_FEATURE]: (state, { payload }) => {
+      const featureSet = new Set(state)
+      featureSet.delete(payload)
+      return [...featureSet].filter(a => a)
+    }
+  }
+)
+
+const combinedReducers = combineReducers({ customUserSettings, qaFeatures })
 const rootReducer = (state = getInitialState(), action) => {
   // eslint-disable-next-line
-    switch(action.type) {
+  switch(action.type) {
     case INITIALIZE:
       return action.payload
     case SET_SNIPPET:
@@ -58,7 +75,7 @@ const rootReducer = (state = getInitialState(), action) => {
   }
   return {
     ...state,
-    customUserSettings: customUserSettings(state.customUserSettings, action)
+    ...combinedReducers(state, action)
   }
 }
 

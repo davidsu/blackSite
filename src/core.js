@@ -35,14 +35,15 @@ function shouldReloadWalkme(newState, oldState) {
   return (
     newState.snippet !== oldState.snippet ||
     newState.walkmeUrl !== oldState.walkmeUrl ||
-    newState.customUserSettings !== oldState.customUserSettings
+    newState.customUserSettings !== oldState.customUserSettings ||
+    newState.qaFeature !== oldState.qaFeature
   )
 }
 
 let state = store.getState()
 store.subscribe(() => {
   const newState = store.getState() || {}
-  syncStateToLocalStorage()
+  syncStateToLocalStorage(newState)
   if (shouldReloadWalkme(newState, state)) {
     loadWalkMe(newState.snippet)
   }

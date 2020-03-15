@@ -1,5 +1,5 @@
 import invert from "lodash/invert"
-import { sources, customLibStorageKey } from "../consts"
+import { qaFeaturesKey, sources, customLibStorageKey } from "../consts"
 
 function getInitialState() {
   const persistedWalkmeUrl = (
@@ -13,10 +13,15 @@ function getInitialState() {
     ...new Set([walkmeUrl, ...Object.keys(sources)])
   ].sort()
 
+  const qaFeatures = (localStorage.getItem(qaFeaturesKey) || "")
+    .split(/\s+/)
+    .filter(a => a)
+
   return {
     snippet: window.localStorage.getItem("snippet") || "",
     walkmeUrlSources,
     walkmeUrl,
+    qaFeatures,
     customUserSettings: {
       url: localStorage.getItem("walkme_custom_user_settings_url"),
       env: localStorage.getItem("walkme_custom_user_settings_env"),
