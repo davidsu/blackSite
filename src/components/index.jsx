@@ -9,6 +9,7 @@ import WalkmeUrlComponent from "./WalkmeUrl"
 import LoadWalkmeBtn from "./LoadWalkmeBtn"
 import SnippetSelectorComponent from "./SnippetSelector"
 import CustomUserSettingsComponent from "./CustomUserSettings"
+import LoadSuperscriptButton from './LoadSuperscriptButton'
 
 function mapWalkmeUrlToKey({ walkmeUrl, walkmeUrlSources }) {
   const walkmeUrlKey = walkmeUrl
@@ -39,4 +40,4 @@ const WalkmeUrl = connect(
 
 const mapStateToSnippet = ({ snippet }) => ({ snippet })
 const SnippetSelector = connect(mapStateToSnippet)(SnippetSelectorComponent)
-export { LoadWalkmeBtn, SnippetSelector, WalkmeUrl, CustomUserSettings }
+export { LoadWalkmeBtn, SnippetSelector, WalkmeUrl, CustomUserSettings, LoadSuperscriptButton }

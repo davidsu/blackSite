@@ -1,25 +1,33 @@
 import { store } from "./store"
+import { superScriptLoaderCode } from "./consts"
 import { SET_SNIPPET } from "./store/actionTypes"
 import { syncStateToLocalStorage } from "./persistence"
 import { sendMessage, isExtension } from "./extensiontUtils"
 
 let reloadWalkmeCountDown = 6
 
-function loadWalkMe(snippetArg) {
-  const snippet =
-    typeof snippetArg === "string" ? snippetArg : store.getState().snippet
+function evalCode(code) {
   if (isExtension()) {
-    sendMessage({ loadWalkMe: snippet })
+    sendMessage({ eval: code })
   } else {
-    console.log({ snippet })
-    if (!--reloadWalkmeCountDown) location.reload() // eslint-disable-line no-restricted-globals
-        window._walkMe?.removeWalkMe?.() //eslint-disable-line
     try {
       // eslint-disable-next-line no-eval
-      window.eval(snippet)
+      window.eval(code)
       // eslint-disable-next-line no-empty
     } catch {}
   }
+}
+function loadWalkMe(snippetArg) {
+  if (!isExtension() && !--reloadWalkmeCountDown) {
+    location.reload() // eslint-disable-line no-restricted-globals
+  }
+  const snippet =
+    typeof snippetArg === "string" ? snippetArg : store.getState().snippet
+  evalCode(snippet)
+}
+
+function loadSuperscript() {
+  evalCode(superScriptLoaderCode)
 }
 
 function shouldReloadWalkme(newState, oldState) {
@@ -42,4 +50,4 @@ store.subscribe(() => {
 })
 
 const setSnippet = payload => store.dispatch({ type: SET_SNIPPET, payload })
-export { setSnippet, loadWalkMe, isExtension }
+export { setSnippet, loadWalkMe, isExtension, loadSuperscript }
