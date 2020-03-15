@@ -3,7 +3,7 @@
     "version": "1.0",
     "description": "",
     "permissions": ["declarativeContent", "storage", "<all_urls>"],
-    "page_action": {
+    "browser_action": {
       "default_popup": "index.html",
       "default_icon": {
         "16": "/public/favicon-16x16.png",
@@ -25,10 +25,6 @@
     "icons": {
         "16": "/public/favicon-16x16.png",
         "32": "/public/favicon-32x32.png"
-    },
-    "background": {
-      "scripts": ["background.js"],
-      "persistent": false
     },
     "manifest_version": 2,
     "content_security_policy": "script-src 'self' 'sha256-GsEAqV68CWexRyx9jqsPuRIlaZ4ZLXPM0Jx0WIfV9cM='; object-src 'self'"

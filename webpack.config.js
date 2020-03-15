@@ -8,8 +8,7 @@ module.exports = {
   devtool: "inline-source-map",
   entry: {
     main: "./src/index.jsx",
-    runInPage: "./src/runInPage.js",
-    background: "./src/background.js"
+    runInPage: "./src/runInPage.js"
   },
   module: {
     rules: [
