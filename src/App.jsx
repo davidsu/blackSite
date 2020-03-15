@@ -4,7 +4,7 @@ import Container from "@material-ui/core/Container"
 import { createMuiTheme } from "@material-ui/core/styles"
 import { ThemeProvider } from "@material-ui/styles"
 import { store } from "./store"
-import { WalkmeUrl, LoadWalkmeBtn, SnippetSelector } from "./components"
+import { WalkmeUrl, LoadWalkmeBtn, SnippetSelector, CustomUserSettings } from "./components"
 import { isExtension } from "./core"
 import "./App.css"
 
@@ -25,6 +25,7 @@ const App = () => (
           <br />
           <br />
           <SnippetSelector />
+          <CustomUserSettings />
         </ThemeProvider>
       </Provider>
     </Container>

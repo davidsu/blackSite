@@ -1,8 +1,43 @@
-import { INITIALIZE, SET_SNIPPET, SET_WALKME_URL } from "./actionTypes"
+import {
+  SET_CUSTOM_SETTINGS_URL,
+  SET_CUSTOM_SETTINGS_GUID,
+  SET_CUSTOM_SETTINGS_ENV,
+  INITIALIZE,
+  SET_SNIPPET,
+  SET_WALKME_URL
+} from "./actionTypes"
 import { getInitialState } from "./initialState"
 import { sources } from "../consts"
+// import { combineReducers } from 'redux'
 
-const reducer = (state = getInitialState(), action) => {
+const createReducer = (initialState, reducers) => (
+  state = initialState,
+  action
+) => {
+  if (action.type in reducers) {
+    return reducers[action.type](state, action)
+  }
+  return state
+}
+
+const customUserSettings = createReducer(
+  {},
+  {
+    [SET_CUSTOM_SETTINGS_ENV]: (state, { payload }) => ({
+      ...state,
+      env: payload
+    }),
+    [SET_CUSTOM_SETTINGS_GUID]: (state, { payload }) => ({
+      ...state,
+      guid: payload
+    }),
+    [SET_CUSTOM_SETTINGS_URL]: (state, { payload }) => ({
+      ...state,
+      url: payload
+    })
+  }
+)
+const rootReducer = (state = getInitialState(), action) => {
   // eslint-disable-next-line
     switch(action.type) {
     case INITIALIZE:
@@ -21,7 +56,11 @@ const reducer = (state = getInitialState(), action) => {
         ]
       }
   }
-  return state
+  return {
+    ...state,
+    customUserSettings: customUserSettings(state.customUserSettings, action)
+  }
 }
 
+const reducer = rootReducer
 export { reducer }

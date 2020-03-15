@@ -1,3 +1,6 @@
 export const SET_SNIPPET = "SET_SNIPPET"
 export const SET_WALKME_URL = "SET_WALKME_URL"
 export const INITIALIZE = "INITIALIZE"
+export const SET_CUSTOM_SETTINGS_URL = "setCustomSettings/url"
+export const SET_CUSTOM_SETTINGS_GUID = "setCustomSettings/guid"
+export const SET_CUSTOM_SETTINGS_ENV = "setCustomSettings/env"

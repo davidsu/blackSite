@@ -1,30 +1,13 @@
 import React from "react"
-import TextField from "@material-ui/core/TextField"
-import Autocomplete from "@material-ui/lab/Autocomplete"
+import Autocomplete from "./AutoComplete"
 
 const WalkMeUrl = ({ onChangeWalkmeUrl, walkmeUrlKey, walkmeUrlSources }) => (
   <Autocomplete
-    id="combo-box-demo"
-    freeSolo
     options={walkmeUrlSources}
-    getOptionLabel={option => option}
-    data-testid="WalkMeUrl"
-    size="small"
-    onChange={(e, value) => {
-      onChangeWalkmeUrl(value)
-    }}
+    onChange={onChangeWalkmeUrl}
     value={walkmeUrlKey}
-    renderInput={params => (
-      <TextField
-        onChange={({ target }) => {
-          onChangeWalkmeUrl(target.value)
-        }}
-        {...params}
-        size="small"
-        label="Lib Version: Paste or Choose"
-        variant="outlined"
-      />
-    )}
+    label="Lib Version: Paste or Choose"
+    data-testid="WalkMeUrl"
   />
 )
 

@@ -10,7 +10,12 @@ describe("initialState", () => {
     const expected = {
       snippet: "dummySnippet",
       walkmeUrl: "static",
-      walkmeUrlSources: Object.keys(sources).sort()
+      walkmeUrlSources: Object.keys(sources).sort(),
+      customUserSettings: {
+        env: null,
+        guid: null,
+        url: null
+      }
     }
     expect(initialState).toEqual(expected)
   })
@@ -25,7 +30,12 @@ describe("initialState", () => {
     const expected = {
       snippet: "",
       walkmeUrl,
-      walkmeUrlSources: [...Object.keys(sources), walkmeUrl].sort()
+      walkmeUrlSources: [...Object.keys(sources), walkmeUrl].sort(),
+      customUserSettings: {
+        env: null,
+        guid: null,
+        url: null
+      }
     }
     expect(initialState).toEqual(expected)
   })

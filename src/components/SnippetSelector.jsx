@@ -5,7 +5,7 @@ import SnippetCodeDisplayer from "./SnippetCodeDisplayer"
 
 const SnippetSelector = props => {
   return (
-    <div style={{ textAlign: "left" }}>
+    <div className="leftAlign">
       <SnippetSelectorComboBox {...props} />
       <SnippetCodeDisplayer {...props} />
     </div>

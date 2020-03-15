@@ -7,7 +7,6 @@ import { snippetFiles } from "../consts"
 
 const TextArea = ({ snippet }) => (
   <Autocomplete
-    id="combo-box-demo"
     freeSolo
     options={Object.keys(snippetFiles)}
     getOptionLabel={option => option}

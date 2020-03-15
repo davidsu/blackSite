@@ -1,3 +1,4 @@
+import pickBy from "lodash/pickBy"
 import { store } from "./store"
 import { SET_SNIPPET } from "./store/actionTypes"
 import { sources } from "./consts"
@@ -26,6 +27,14 @@ function removeLocalStorage(key) {
   }
 }
 
+function updateLocalStorage(key, value) {
+  if (!value) {
+    removeLocalStorage(key)
+  } else {
+    setLocalStorage(key, value)
+  }
+}
+
 function loadWalkMe(snippetArg) {
   const snippet =
     typeof snippetArg === "string" ? snippetArg : store.getState().snippet
@@ -46,7 +55,8 @@ function loadWalkMe(snippetArg) {
 const shouldReloadWalkme = (newState, oldState) =>
   !isExtension() &&
   (newState.snippet !== oldState.snippet ||
-    newState.walkmeUrl !== oldState.walkmeUrl)
+    newState.walkmeUrl !== oldState.walkmeUrl ||
+    newState.customUserSettings !== oldState.customUserSettings)
 
 function getRealWalkmeUrl(libVersion) {
   if (/^\d{8}-\d{6}/.test(libVersion)) {
@@ -55,7 +65,16 @@ function getRealWalkmeUrl(libVersion) {
   return sources[libVersion]
 }
 
-let state = {}
+function handleUserSettingsChanged(newState, oldState = {}) {
+  if (newState !== oldState) {
+    const changed = pickBy(newState, (value, key) => oldState[key] !== value)
+    for (const [key, value] of Object.entries(changed)) {
+      updateLocalStorage(`walkme_custom_user_settings_${key}`, value)
+    }
+  }
+}
+
+let state = store.getState()
 store.subscribe(() => {
   const newState = store.getState() || {}
   if (newState.walkmeUrl !== state.walkmeUrl) {
@@ -69,6 +88,10 @@ store.subscribe(() => {
   if (newState.snippet !== state.snippet) {
     setLocalStorage("snippet", newState.snippet)
   }
+  handleUserSettingsChanged(
+    newState.customUserSettings,
+    state.customUserSettings
+  )
   if (shouldReloadWalkme(newState, state)) {
     loadWalkMe(newState.snippet)
   }
