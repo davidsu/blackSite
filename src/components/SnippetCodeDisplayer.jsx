@@ -1,7 +1,7 @@
 import React from "react"
 // eslint-disable-next-line camelcase
 import { js_beautify } from "js-beautify"
-import hljs from "highlight.js/lib"
+import hljs from "highlight.js/lib/highlight"
 import javascript from "highlight.js/lib/languages/javascript"
 import "highlight.js/styles/default.css"
 import "highlight.js/styles/darkula.css"
