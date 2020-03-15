@@ -1,21 +1,11 @@
 const HtmlWebPackPlugin = require("html-webpack-plugin")
 const CopyWebpackPlugin = require("copy-webpack-plugin")
-const path = require("path")
+const { BundleAnalyzerPlugin } = require("webpack-bundle-analyzer")
 
+const mode = process.env.NODE_ENV || "production"
 module.exports = {
-  mode: "development",
-  devServer: {
-    writeToDisk: true,
-    contentBase: path.join(__dirname, "/dist"),
-    port: 3000,
-    hot: true,
-    https: true,
-    disableHostCheck: true
-  },
+  mode,
   devtool: "inline-source-map",
-  optimization: {
-    minimize: false
-  },
   entry: {
     main: "./src/index.jsx",
     runInPage: "./src/runInPage.js",
@@ -50,7 +40,16 @@ module.exports = {
       filename: "./index.html",
       chunks: ["main"]
     }),
-    new CopyWebpackPlugin([{ from: "public", to: "public" }, "./manifest.json"])
+    new CopyWebpackPlugin([
+      { from: "public", to: "public" },
+      "./manifest.json"
+    ]),
+    new BundleAnalyzerPlugin({
+      generateStatsFile: true,
+      statsFilename: "./bundleanalyzerstats",
+      analyzerMode: "static",
+      openAnalyzer: false
+    })
   ],
   resolve: {
     extensions: [".js", ".jsx"]

@@ -1,5 +1,5 @@
 import React from "react"
-import { invert } from "lodash"
+import  invert  from "lodash/invert"
 import { snippetFiles } from "../consts"
 import { setSnippet } from '../core'
 

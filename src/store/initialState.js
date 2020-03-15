@@ -1,4 +1,4 @@
-import { invert } from "lodash"
+import invert from "lodash/invert"
 import { sources, customLibStorageKey } from "../consts"
 
 function getInitialState() {
