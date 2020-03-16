@@ -42,9 +42,28 @@ function shouldReloadWalkme(newState, oldState) {
   )
 }
 
+function loadInitialState() {
+  if (window?.chrome?.tabs) {
+    window.chrome.tabs.query({ active: true, currentWindow: true }, tabs => {
+      window.chrome.tabs.sendMessage(
+        tabs[0].id,
+        "getInitialState",
+        response => {
+          if (response) {
+            store.dispatch({ type: INITIALIZE, payload: response })
+          }
+        }
+      )
+    })
+  }
+}
 function loadExternalConfig(config) {
   syncStateToLocalStorage(config)
-  store.dispatch({ type: INITIALIZE, payload: getInitialState() })
+  if (isExtension()) {
+    setTimeout(loadInitialState, 10)
+  } else {
+    store.dispatch({ type: INITIALIZE, payload: getInitialState() })
+  }
 }
 
 let state = store.getState()

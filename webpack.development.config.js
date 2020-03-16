@@ -4,6 +4,7 @@ const base = require("./webpack.config")
 
 const result = merge(base, {
   mode: "development",
+  devtool: "inline-source-map",
   devServer: {
     contentBase: path.join(__dirname, "/dist"),
     writeToDisk: true,

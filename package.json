@@ -28,7 +28,10 @@
     "build:production": "NODE_ENV=production webpack",
     "test": "jest",
     "lint": "eslint . --ext=js,jsx",
-    "deploy": "npm run build:production && surge dist http://addicted-war.surge.sh/"
+    "zipExtension": "rm extension.zip; zip -r extension.zip dist/",
+    "deploy:site": "npm run build:production && surge dist http://addicted-war.surge.sh/",
+    "prepare-extension-zip": "npm run build && npm run zipExtension", 
+    "deploy": "npm run prepare-extension-zip && npm run deploy:site"
   },
   "devDependencies": {
     "@babel/core": "^7.8.7",
