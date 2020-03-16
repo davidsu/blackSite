@@ -1,6 +1,7 @@
 import { store } from "./store"
+import { getInitialState } from "./store/initialState"
 import { superScriptLoaderCode } from "./consts"
-import { SET_SNIPPET } from "./store/actionTypes"
+import { SET_SNIPPET, INITIALIZE } from "./store/actionTypes"
 import { syncStateToLocalStorage } from "./persistence"
 import { sendMessage, isExtension } from "./extensiontUtils"
 
@@ -41,6 +42,11 @@ function shouldReloadWalkme(newState, oldState) {
   )
 }
 
+function loadExternalConfig(config) {
+  syncStateToLocalStorage(config)
+  store.dispatch({ type: INITIALIZE, payload: getInitialState() })
+}
+
 let state = store.getState()
 store.subscribe(() => {
   const newState = store.getState() || {}
@@ -52,4 +58,10 @@ store.subscribe(() => {
 })
 
 const setSnippet = payload => store.dispatch({ type: SET_SNIPPET, payload })
-export { setSnippet, loadWalkMe, isExtension, loadSuperscript }
+export {
+  loadExternalConfig,
+  setSnippet,
+  loadWalkMe,
+  isExtension,
+  loadSuperscript
+}

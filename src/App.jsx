@@ -5,6 +5,7 @@ import { createMuiTheme } from "@material-ui/core/styles"
 import { ThemeProvider } from "@material-ui/styles"
 import { store } from "./store"
 import {
+  DumpConfiguration,
   FeaturesList,
   WalkmeUrl,
   LoadWalkmeBtn,
@@ -61,6 +62,7 @@ const App = () => (
           <CustomUserSettings />
           <FeaturesList />
           <br />
+          <DumpConfiguration />
         </ThemeProvider>
       </Provider>
     </Container>
