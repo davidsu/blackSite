@@ -33,7 +33,7 @@ function updateLocalStorage(key, value) {
 }
 
 function syncWalkmeUrl({ walkmeUrl }) {
-  const realUrl = getRealWalkmeUrl(walkmeUrl)
+  const realUrl = getRealWalkmeUrl(walkmeUrl.url)
   if (realUrl === "production") {
     removeLocalStorage(customLibStorageKey)
   } else {

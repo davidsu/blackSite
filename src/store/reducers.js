@@ -12,7 +12,7 @@ import {
 import { getInitialState } from "./initialState"
 import { sources } from "../consts"
 
-const createReducer = (initialState, reducers) => (
+const createReducer = (reducers, initialState = {}) => (
   state = initialState,
   action
 ) => {
@@ -22,61 +22,55 @@ const createReducer = (initialState, reducers) => (
   return state
 }
 
-const customUserSettings = createReducer(
-  {},
-  {
-    [SET_CUSTOM_SETTINGS_ENV]: (state, { payload }) => ({
-      ...state,
-      env: payload
-    }),
-    [SET_CUSTOM_SETTINGS_GUID]: (state, { payload }) => ({
-      ...state,
-      guid: payload
-    }),
-    [SET_CUSTOM_SETTINGS_URL]: (state, { payload }) => ({
-      ...state,
-      url: payload
-    })
-  }
-)
+const customUserSettings = createReducer({
+  [SET_CUSTOM_SETTINGS_ENV]: (state, { payload }) => ({
+    ...state,
+    env: payload
+  }),
+  [SET_CUSTOM_SETTINGS_GUID]: (state, { payload }) => ({
+    ...state,
+    guid: payload
+  }),
+  [SET_CUSTOM_SETTINGS_URL]: (state, { payload }) => ({
+    ...state,
+    url: payload
+  })
+})
 
-const qaFeatures = createReducer(
-  {},
-  {
-    [ADD_QA_FEATURE]: (state, { payload }) =>
-      [...state, ...payload.split(/\s+/)].filter(a => a),
-    [DELETE_QA_FEATURE]: (state, { payload }) => {
-      const featureSet = new Set(state)
-      featureSet.delete(payload)
-      return [...featureSet].filter(a => a)
-    }
+const qaFeatures = createReducer({
+  [ADD_QA_FEATURE]: (state, { payload }) =>
+    [...state, ...payload.split(/\s+/)].filter(a => a),
+  [DELETE_QA_FEATURE]: (state, { payload }) => {
+    const featureSet = new Set(state)
+    featureSet.delete(payload)
+    return [...featureSet].filter(a => a)
   }
-)
+})
 
-const combinedReducers = combineReducers({ customUserSettings, qaFeatures })
+const snippet = createReducer({
+  [SET_SNIPPET]: (state, { payload }) =>
+    payload.replace(/<script.*?>(.*)<\/script>/, "$1")
+})
+
+const walkmeUrl = createReducer({
+  [SET_WALKME_URL]: (state, action) => ({
+    url: action.payload,
+    sources: [...new Set([action.payload, ...Object.keys(sources)])]
+  })
+})
+const combinedReducers = combineReducers({
+  customUserSettings,
+  qaFeatures,
+  snippet,
+  walkmeUrl
+})
 const rootReducer = (state = getInitialState(), action) => {
   // eslint-disable-next-line
   switch(action.type) {
     case INITIALIZE:
       return action.payload
-    case SET_SNIPPET:
-      return {
-        ...state,
-        snippet: action.payload.replace(/<script.*?>(.*)<\/script>/, "$1")
-      }
-    case SET_WALKME_URL:
-      return {
-        ...state,
-        walkmeUrl: action.payload,
-        walkmeUrlSources: [
-          ...new Set([action.payload, ...Object.keys(sources)])
-        ]
-      }
   }
-  return {
-    ...state,
-    ...combinedReducers(state, action)
-  }
+  return combinedReducers(state, action)
 }
 
 const reducer = rootReducer

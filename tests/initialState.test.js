@@ -9,8 +9,10 @@ describe("initialState", () => {
     const initialState = getInitialState()
     const expected = {
       snippet: "dummySnippet",
-      walkmeUrl: "static",
-      walkmeUrlSources: Object.keys(sources).sort(),
+      walkmeUrl: {
+        url: "static",
+        sources: Object.keys(sources).sort()
+      },
       qaFeatures: [],
       customUserSettings: {
         env: null,
@@ -24,14 +26,16 @@ describe("initialState", () => {
   it("should extract lib version from customLibUrl", () => {
     const customLibUrl =
       "https://cdn.walkme.com/player/lib/walkme_lib_20200309-112014-db3f672e-db3f672e.js"
-    const walkmeUrl = "20200309-112014-db3f672e-db3f672e"
+    const url = "20200309-112014-db3f672e-db3f672e"
     localStorage.setItem(customLibStorageKey, customLibUrl)
 
     const initialState = getInitialState()
     const expected = {
       snippet: "",
-      walkmeUrl,
-      walkmeUrlSources: [...Object.keys(sources), walkmeUrl].sort(),
+      walkmeUrl: {
+        url,
+        sources: [...Object.keys(sources), url].sort()
+      },
       qaFeatures: [],
       customUserSettings: {
         env: null,

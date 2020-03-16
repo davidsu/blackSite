@@ -6,12 +6,13 @@ function getInitialState() {
     localStorage.getItem(customLibStorageKey) || ""
   ).replace(/^.*(\d{8}-\d{6}.*)\.js$/, "$1")
 
-  const walkmeUrl =
+  const url =
     invert(sources)[persistedWalkmeUrl] || persistedWalkmeUrl || "production"
 
-  const walkmeUrlSources = [
-    ...new Set([walkmeUrl, ...Object.keys(sources)])
-  ].sort()
+  const walkmeUrl = {
+    url,
+    sources: [...new Set([url, ...Object.keys(sources)])].sort()
+  }
 
   const qaFeatures = (localStorage.getItem(qaFeaturesKey) || "")
     .split(/\s+/)
@@ -19,7 +20,6 @@ function getInitialState() {
 
   return {
     snippet: window.localStorage.getItem("snippet") || "",
-    walkmeUrlSources,
     walkmeUrl,
     qaFeatures,
     customUserSettings: {

@@ -16,8 +16,9 @@ import LoadSuperscriptButton from "./LoadSuperscriptButton"
 import FeaturesListComponent from "./FeaturesList"
 import DumpConfigurationComponent from "./DumpConfiguration"
 
-function mapWalkmeUrlToKey({ walkmeUrl, walkmeUrlSources }) {
-  const walkmeUrlKey = walkmeUrl
+function mapWalkmeUrlToKey({ walkmeUrl }) {
+  const walkmeUrlKey = walkmeUrl.url
+  const walkmeUrlSources = walkmeUrl.sources
   return { walkmeUrlKey, walkmeUrlSources }
 }
 function mapDispatchToChangeWalkmeUrl(dispatch) {
