@@ -27,7 +27,7 @@
     "build": "webpack --config=webpack.development.config.js",
     "build:production": "NODE_ENV=production webpack",
     "test": "jest",
-    "lint": "eslint .",
+    "lint": "eslint . --ext=js,jsx",
     "deploy": "npm run build:production && surge dist http://addicted-war.surge.sh/"
   },
   "devDependencies": {

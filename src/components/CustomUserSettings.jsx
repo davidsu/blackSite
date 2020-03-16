@@ -33,18 +33,18 @@ const makeUserSettings = props =>
 const makeEnvCombo = ({ setEnv, env }) => (
   <Autocomplete
     options={["production", "preview", "play", "test", "success"]}
-    value={env || ''}
+    value={env || ""}
     onChange={setEnv}
     label={createLabel("env", !!env)}
-    data-testid='customUserSettingsEnv'
+    data-testid="customUserSettingsEnv"
   />
 )
 const CustomUserSettings = props => (
   <div>
     {makeUserSettings(props)}
-  <br />
-  {makeEnvCombo(props)}
-  <br />
+    <br />
+    {makeEnvCombo(props)}
+    <br />
   </div>
 )
 

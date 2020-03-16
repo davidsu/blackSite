@@ -32,7 +32,7 @@ export default ({ state, loadConfigFile }) => {
         style={{ display: "none" }}
         onChange={e => {
           loadConfigFile(e.target.files[0])
-          e.target.value = ''
+          e.target.value = ""
         }}
       />
     </div>

@@ -1,4 +1,4 @@
-import React, { useState } from "react"
+import React from "react"
 import { makeStyles } from "@material-ui/core/styles"
 import List from "@material-ui/core/List"
 import ListItem from "@material-ui/core/ListItem"
@@ -25,12 +25,7 @@ function makeList(qaFeatures, deleteFeature) {
   return qaFeatures.map(feature => (
     <ListItem key={feature}>
       <ListItemText primary={feature} />
-      <ListItemSecondaryAction
-        onClick={() => {
-          debugger
-          deleteFeature(feature)
-        }}
-      >
+      <ListItemSecondaryAction onClick={() => deleteFeature(feature)}>
         <IconButton edge="end" aria-label="delete">
           <DeleteIcon />
         </IconButton>
@@ -47,10 +42,9 @@ export default function InteractiveList({
 
   function onKeyUp(e) {
     if (e.key === "Control" || e.key === "Enter") {
-      debugger
       addFeature(e.target.value)
-      e.target.value = ''
-    }  
+      e.target.value = ""
+    }
   }
 
   return (
