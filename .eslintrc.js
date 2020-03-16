@@ -27,6 +27,7 @@ module.exports = {
   ],
   rules: {
 	semi: ['error', 'never'],
+	'no-debugger': 'error',
 	'prettier/prettier': 'error',
 	'import/prefer-default-export': 'off',
 	'no-plusplus': 'off',
@@ -37,6 +38,8 @@ module.exports = {
 	'jsx-a11y/click-events-have-key-events': 'off',
 	'react/jsx-props-no-spreading': 'off',
 	'react/no-danger': 'off',
-	'no-restricted-syntax': 'off'
+	'no-restricted-syntax': 'off',
+	'camelcase': 'off',
+	'no-eval': 'off'
   },
 };

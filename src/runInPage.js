@@ -16,4 +16,8 @@ chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
     document.head.append(script)
     loadWalkMe(request.loadWalkMe)
   }
+
+  if (request.evalCode) {
+    eval(request.evalCode)
+  }
 })

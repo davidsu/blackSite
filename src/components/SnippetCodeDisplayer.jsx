@@ -17,7 +17,10 @@ function getHtml(snippet) {
 
 const SnippetCodeDisplayer = ({ snippet }) => (
   <pre className="prettyprint lang-js">
-    <code dangerouslySetInnerHTML={getHtml(snippet)} />
+    <code
+      data-testid="snippetTextInput"
+      dangerouslySetInnerHTML={getHtml(snippet)}
+    />
   </pre>
 )
 

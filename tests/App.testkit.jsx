@@ -5,12 +5,12 @@ import { store } from "../src/store"
 import { INITIALIZE } from "../src/store/actionTypes"
 import { getInitialState } from "../src/store/initialState"
 
-export default (initialState = getInitialState()) => {
-  store.dispatch({ type: INITIALIZE, payload: initialState })
+export default (initialState = {}) => {
+  store.dispatch({ type: INITIALIZE, payload: {...getInitialState(), ...initialState} })
   const rendered = render(<App />)
   const getLoadWalkMeButton = () => rendered.getByTestId("loadWalkMeButton")
-  const getSnippetTextArea = () => rendered.getByTestId("snippetTextInput")
-  const getSnippetSelector = () => rendered.getByTestId("snippetSelector")
+  const getSnippetCodeDisplayer = () => rendered.getByTestId("snippetTextInput")
+  const snippetSelectorInput = () => rendered.getByTestId("snippetSelector").querySelector('input')
   const getWalkmeUrlSelectorInput = () =>
     rendered.getByTestId("WalkMeUrl").querySelector("input")
   return {
@@ -18,7 +18,7 @@ export default (initialState = getInitialState()) => {
     rendered,
     getWalkmeUrlSelectorInput,
     getLoadWalkMeButton,
-    getSnippetTextArea,
-    getSnippetSelector
+    getSnippetCodeDisplayer,
+    snippetSelectorInput
   }
 }

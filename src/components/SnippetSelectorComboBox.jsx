@@ -10,7 +10,7 @@ const TextArea = ({ snippet }) => (
     freeSolo
     options={Object.keys(snippetFiles)}
     getOptionLabel={option => option}
-    data-testid="snippetSelector2"
+    data-testid="snippetSelector"
     size="small"
     onChange={(e, value) => {
       setSnippet(snippetFiles[value] || "")

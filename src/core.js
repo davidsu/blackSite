@@ -6,9 +6,9 @@ import { sendMessage, isExtension } from "./extensiontUtils"
 
 let reloadWalkmeCountDown = 6
 
-function evalCode(code) {
+function evalCode(funcName, code) {
   if (isExtension()) {
-    sendMessage({ eval: code })
+    sendMessage({ [funcName]: code })
   } else {
     try {
       // eslint-disable-next-line no-eval
@@ -21,13 +21,14 @@ function loadWalkMe(snippetArg) {
   if (!isExtension() && !--reloadWalkmeCountDown) {
     location.reload() // eslint-disable-line no-restricted-globals
   }
+  window._walkMe?.removeWalkMe?.() // eslint-disable-line no-unused-expressions, no-underscore-dangle
   const snippet =
     typeof snippetArg === "string" ? snippetArg : store.getState().snippet
-  evalCode(snippet)
+  evalCode("loadWalkMe", snippet)
 }
 
 function loadSuperscript() {
-  evalCode(superScriptLoaderCode)
+  evalCode("evalCode", superScriptLoaderCode)
 }
 
 function shouldReloadWalkme(newState, oldState) {

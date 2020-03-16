@@ -1,4 +1,5 @@
 import { fireEvent } from "@testing-library/react"
+import { js_beautify } from "js-beautify"
 import testkit from "./App.testkit"
 import { snippetFiles, customLibStorageKey, sources } from "../src/consts"
 
@@ -10,14 +11,14 @@ it("should loadWalkMe on btn click", () => {
 })
 
 it("should show snippet on load", () => {
-  const text = testkit({ snippet: "someSnippet" }).getSnippetTextArea()
-  expect(text.value).toEqual("someSnippet")
+  const text = testkit({ snippet: "someSnippet" }).getSnippetCodeDisplayer()
+  expect(text.textContent).toEqual("someSnippet")
 })
 
 it("should select snippet through select box", () => {
   const spyEval = spyOnEval()
   const kit = testkit()
-  const snippetSelector = kit.getSnippetSelector()
+  const snippetSelector = kit.snippetSelectorInput()
   fireEvent.change(snippetSelector, { target: { value: "end user IDP" } })
   expect(kit.store.getState().snippet).toEqual(snippetFiles["end user IDP"])
   expect(spyEval).toHaveBeenCalledWith(snippetFiles["end user IDP"])
@@ -25,12 +26,16 @@ it("should select snippet through select box", () => {
 
 it("should change selectBox value when snippet changed in textArea", () => {
   const kit = testkit()
-  const textArea = kit.getSnippetTextArea()
-  const snippetSelector = kit.getSnippetSelector()
-  fireEvent.change(textArea, {
-    target: { value: snippetFiles["one resource only"] }
+  const snippetKey = "one resource only"
+  const snippetCodeDisplayer = kit.getSnippetCodeDisplayer()
+  const snippetSelector = kit.snippetSelectorInput()
+  fireEvent.change(snippetSelector, {
+    target: { value: snippetFiles[snippetKey] }
   })
-  expect(snippetSelector.value).toEqual("one resource only")
+  expect(snippetCodeDisplayer.textContent).toEqual(
+    js_beautify(snippetFiles[snippetKey])
+  )
+  expect(snippetSelector.value).toEqual(snippetKey)
 })
 
 it("should set localStorage and reload walkme on customLibUrl change", () => {
@@ -56,7 +61,7 @@ it("should dynamically add a typed key to customLibUrls", () => {
   expect(spyEval).toHaveBeenCalledWith("dummy")
 })
 
-fit("should dynamically add a typed key to customLibUrls", () => {
+it("should dynamically add a typed key to customLibUrls", () => {
   const spyEval = spyOnEval()
   const { getWalkmeUrlSelectorInput } = testkit()
   const walkmeUrlSelector = getWalkmeUrlSelectorInput()
