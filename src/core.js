@@ -24,7 +24,9 @@ function loadWalkMe(snippetArg) {
   }
   window._walkMe?.removeWalkMe?.() // eslint-disable-line no-unused-expressions, no-underscore-dangle
   const snippet =
-    typeof snippetArg === "string" ? snippetArg : store.getState().snippet
+    typeof snippetArg === "string"
+      ? snippetArg
+      : store.getState().snippet || store.getState().snippetFiles.snippetOnPage
   evalCode("loadWalkMe", snippet)
 }
 

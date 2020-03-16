@@ -22,6 +22,7 @@ const createReducer = (reducers, initialState = {}) => (
   return state
 }
 
+const snippetFiles = state => state || {}
 const customUserSettings = createReducer({
   [SET_CUSTOM_SETTINGS_ENV]: (state, { payload }) => ({
     ...state,
@@ -62,7 +63,8 @@ const combinedReducers = combineReducers({
   customUserSettings,
   qaFeatures,
   snippet,
-  walkmeUrl
+  walkmeUrl,
+  snippetFiles
 })
 const rootReducer = (state = getInitialState(), action) => {
   // eslint-disable-next-line

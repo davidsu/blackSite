@@ -23,7 +23,7 @@
   },
   "scripts": {
     "analyze-bundle": "webpack-bundle-analyzer dist/bundleanalyzerstats",
-    "start": "webpack-dev-server --config=webpack.development.config.js",
+    "start": "webpack-dev-server --config=webpack.development.config.js --open",
     "build": "webpack --config=webpack.development.config.js",
     "build:production": "NODE_ENV=production webpack",
     "test": "jest",

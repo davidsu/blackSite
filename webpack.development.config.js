@@ -9,6 +9,7 @@ const result = merge(base, {
     minimize: false
   }
 })
+console.log("NODE_ENV", process.env.NODE_ENV)
 if (process.env.NODE_ENV !== "production") {
   result.devServer = {
     contentBase: path.join(__dirname, "/dist"),

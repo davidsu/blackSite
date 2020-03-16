@@ -67,7 +67,10 @@ const WalkmeUrl = connect(
   mapDispatchToChangeWalkmeUrl
 )(WalkmeUrlComponent)
 
-const mapStateToSnippet = ({ snippet }) => ({ snippet })
+const mapStateToSnippet = ({ snippet, snippetFiles }) => ({
+  snippet,
+  snippetFiles
+})
 const SnippetSelector = connect(mapStateToSnippet)(SnippetSelectorComponent)
 export {
   LoadWalkmeBtn,

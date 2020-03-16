@@ -1,5 +1,5 @@
 import { getInitialState } from "../src/store/initialState"
-import { sources, customLibStorageKey } from "../src/consts"
+import { snippetFiles, sources, customLibStorageKey } from "../src/consts"
 
 describe("initialState", () => {
   beforeEach(() => localStorage.clear())
@@ -9,6 +9,7 @@ describe("initialState", () => {
     const initialState = getInitialState()
     const expected = {
       snippet: "dummySnippet",
+      snippetFiles,
       walkmeUrl: {
         url: "static",
         sources: Object.keys(sources).sort()
@@ -32,6 +33,7 @@ describe("initialState", () => {
     const initialState = getInitialState()
     const expected = {
       snippet: "",
+      snippetFiles,
       walkmeUrl: {
         url,
         sources: [...Object.keys(sources), url].sort()
