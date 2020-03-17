@@ -1,7 +1,6 @@
 import { getInitialState } from "./store/initialState"
 import { loadWalkMe } from "./core"
 
-console.log("inPage")
 chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
   if (request === "getInitialState") sendResponse(getInitialState())
   if (request.setLocalStorage) {
