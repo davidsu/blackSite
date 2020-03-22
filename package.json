@@ -29,7 +29,7 @@
     "test": "jest",
     "lint": "eslint . --ext=js,jsx",
     "zipExtension": "rm extension.zip; zip -r extension.zip dist/",
-    "deploy:site": "npm run build:production && surge dist http://addicted-war.surge.sh/",
+    "deploy:site": "npm run build:production && surge dist https://addicted-war.surge.sh/",
     "prepare-extension-zip": "NODE_ENV=production npm run build && npm run zipExtension", 
     "deploy": "npm run prepare-extension-zip && npm run deploy:site"
   },
