@@ -1,7 +1,7 @@
-import { getInitialState } from "./store/initialState"
-import { loadWalkMe } from "./core"
-
-chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
+/* eslint-disable global-require */
+chrome.runtime.onMessage.addListener(async (request, sender, sendResponse) => {
+  const { getInitialState } = require("./store/initialState")
+  const { loadWalkMe } = require("./core")
   if (request === "getInitialState") sendResponse(getInitialState())
   if (request.setLocalStorage) {
     localStorage.setItem(...request.setLocalStorage)

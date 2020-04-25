@@ -2,6 +2,7 @@ import { fireEvent } from "@testing-library/react"
 import { js_beautify } from "js-beautify"
 import testkit from "./App.testkit"
 import { snippetFiles, customLibStorageKey, sources } from "../src/consts"
+import { eventually } from "./testUtils"
 
 const spyOnEval = () => jest.spyOn(window, "eval")
 it("should loadWalkMe on btn click", () => {
@@ -15,13 +16,15 @@ it("should show snippet on load", () => {
   expect(text.textContent).toEqual("someSnippet")
 })
 
-it("should select snippet through select box", () => {
+it("should select snippet through select box", async () => {
   const spyEval = spyOnEval()
   const kit = testkit()
   const snippetSelector = kit.snippetSelectorInput()
   fireEvent.change(snippetSelector, { target: { value: "end user IDP" } })
   expect(kit.store.getState().snippet).toEqual(snippetFiles["end user IDP"])
-  expect(spyEval).toHaveBeenCalledWith(snippetFiles["end user IDP"])
+  await eventually(() =>
+    expect(spyEval).toHaveBeenCalledWith(snippetFiles["end user IDP"])
+  )
 })
 
 it("should change selectBox value when snippet changed in textArea", () => {
@@ -38,17 +41,19 @@ it("should change selectBox value when snippet changed in textArea", () => {
   expect(snippetSelector.value).toEqual(snippetKey)
 })
 
-it("should set localStorage and reload walkme on customLibUrl change", () => {
+it("should set localStorage and reload walkme on customLibUrl change", async () => {
   const spyEval = spyOnEval()
   const { getWalkmeUrlSelectorInput } = testkit()
   const walkmeUrlSelector = getWalkmeUrlSelectorInput()
 
   fireEvent.change(walkmeUrlSelector, { target: { value: "static" } })
-  expect(localStorage.getItem(customLibStorageKey)).toEqual(sources.static)
-  expect(spyEval).toHaveBeenCalledWith("dummy")
+  await eventually(() => {
+    expect(localStorage.getItem(customLibStorageKey)).toEqual(sources.static)
+    expect(spyEval).toHaveBeenCalledWith("dummy")
+  })
 })
 
-it("should dynamically add a typed key to customLibUrls", () => {
+it("should dynamically add a typed key to customLibUrls", async () => {
   const spyEval = spyOnEval()
   const { getWalkmeUrlSelectorInput } = testkit()
   const walkmeUrlSelector = getWalkmeUrlSelectorInput()
@@ -57,11 +62,13 @@ it("should dynamically add a typed key to customLibUrls", () => {
     "https://cdn.walkme.com/player/lib/walkme_lib_20200309-112014-db3f672e-db3f672e.js"
 
   fireEvent.change(walkmeUrlSelector, { target: { value: walkmeUrl } })
-  expect(localStorage.getItem(customLibStorageKey)).toEqual(customLibUrl)
-  expect(spyEval).toHaveBeenCalledWith("dummy")
+  await (() => {
+    expect(localStorage.getItem(customLibStorageKey)).toEqual(customLibUrl)
+    expect(spyEval).toHaveBeenCalledWith("dummy")
+  })
 })
 
-it("should dynamically add a typed key to customLibUrls", () => {
+it("should dynamically add a typed key to customLibUrls", async () => {
   const spyEval = spyOnEval()
   const { getWalkmeUrlSelectorInput } = testkit()
   const walkmeUrlSelector = getWalkmeUrlSelectorInput()
@@ -72,6 +79,8 @@ it("should dynamically add a typed key to customLibUrls", () => {
   )
   fireEvent.click(webpackLocalUrlLi)
 
-  expect(localStorage.getItem(customLibStorageKey)).toEqual(sources.webpack)
-  expect(spyEval).toHaveBeenCalledWith("dummy")
+  await (() => {
+    expect(localStorage.getItem(customLibStorageKey)).toEqual(sources.webpack)
+    expect(spyEval).toHaveBeenCalledWith("dummy")
+  })
 })

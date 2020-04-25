@@ -11,6 +11,8 @@ export default ({
 }) => (
   <Autocomplete
     freeSolo
+    openOnFocus
+    selectOnFocus
     options={options}
     getOptionLabel={option => option}
     data-testid={dataTestid}

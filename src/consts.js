@@ -6,6 +6,8 @@ export const sources = {
 }
 
 export const snippetFiles = {
+  "davidsu working snippet":
+    "(function() {var walkme = document.createElement('script'); walkme.type = 'text/javascript'; walkme.async = true; walkme.src = 'https://cdn.walkme.com/users/edfaa0e48b4c41d3a567ff38ecd325c8/test/walkme_edfaa0e48b4c41d3a567ff38ecd325c8_https.js'; var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(walkme, s); window._walkmeConfig = {smartLoad:true}; })();",
   "one resource only":
     "(function() { var walkme = document.createElement('script'); walkme.type = 'text/javascript'; walkme.async = true; walkme.src = 'https://cdn.walkme.com/users/c264518bbd75488f93a6bab1542e0ea8/walkme_c264518bbd75488f93a6bab1542e0ea8_https.js'; var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(walkme, s); window._walkmeConfig = { smartLoad: true }; })();",
   "end user IDP":
@@ -24,4 +26,5 @@ export const superScriptLoaderCode = `
 `
 
 export const customLibStorageKey = "walkmeCustomeLibUrl"
+export const customPublicPath = "walkmePublicPath"
 export const qaFeaturesKey = "walkme_qa_features"

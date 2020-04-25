@@ -1,11 +1,34 @@
-import { sources, customLibStorageKey, qaFeaturesKey } from "./consts"
+import {
+  sources,
+  customPublicPath,
+  customLibStorageKey,
+  qaFeaturesKey
+} from "./consts"
 import { sendMessage, isExtension } from "./extensiontUtils"
+
+const isLibExist = async url => {
+  try {
+    await fetch(url)
+    return true
+  } catch (e) {
+    return false
+  }
+}
+const libVersionUrl = (libVersion, cdn = "cdn.walkme") =>
+  `https://${cdn}.com/player/lib/walkme_lib_${libVersion}.js`
+async function getLibUrlByVersion(libVersion) {
+  const cdnUrl = isLibExist(libVersionUrl(libVersion))
+  const cdn2Url = isLibExist(libVersionUrl(libVersion, "cdn2.walkmedev"))
+  if (await cdn2Url) return libVersionUrl(libVersion, "cdn2.walkmedev")
+  if (await cdnUrl) return libVersionUrl(libVersion)
+  return libVersion
+}
 
 function getRealWalkmeUrl(libVersion) {
   if (/^\d{8}-\d{6}/.test(libVersion)) {
-    return `https://cdn.walkme.com/player/lib/walkme_lib_${libVersion}.js`
+    return getLibUrlByVersion(libVersion)
   }
-  return sources[libVersion]
+  return sources[libVersion] || libVersion
 }
 
 function setLocalStorage(key, value) {
@@ -32,12 +55,20 @@ function updateLocalStorage(key, value) {
   }
 }
 
-function syncWalkmeUrl({ walkmeUrl }) {
-  const realUrl = getRealWalkmeUrl(walkmeUrl.url)
+async function syncWalkmeUrl({ walkmeUrl }) {
+  const realUrl = await getRealWalkmeUrl(walkmeUrl.url)
+  removeLocalStorage(customPublicPath)
   if (realUrl === "production") {
     removeLocalStorage(customLibStorageKey)
   } else {
     updateLocalStorage(customLibStorageKey, realUrl)
+    const walkmeUrlRegex = /^(.*)(?:walkme_lib_|maketutorial_lib_)(\d{8}-\d{6}-\w{8})\.js/
+    if (walkmeUrlRegex.test(realUrl)) {
+      updateLocalStorage(
+        customPublicPath,
+        realUrl.replace(walkmeUrlRegex, "$1$2/")
+      )
+    }
   }
 }
 
@@ -55,8 +86,8 @@ function syncQaFeatures({ qaFeatures }) {
   setLocalStorage(qaFeaturesKey, qaFeatures.join(" "))
 }
 
-function syncStateToLocalStorage(state) {
-  syncWalkmeUrl(state)
+async function syncStateToLocalStorage(state) {
+  await syncWalkmeUrl(state)
   syncSnippet(state)
   syncUserSettings(state)
   syncQaFeatures(state)

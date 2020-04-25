@@ -59,8 +59,8 @@ function loadInitialState() {
     })
   }
 }
-function loadExternalConfig(config) {
-  syncStateToLocalStorage(config)
+async function loadExternalConfig(config) {
+  await syncStateToLocalStorage(config)
   if (isExtension()) {
     setTimeout(loadInitialState, 10)
   } else {
@@ -69,9 +69,9 @@ function loadExternalConfig(config) {
 }
 
 let state = store.getState()
-store.subscribe(() => {
+store.subscribe(async () => {
   const newState = store.getState() || {}
-  syncStateToLocalStorage(newState)
+  await syncStateToLocalStorage(newState)
   if (shouldReloadWalkme(newState, state)) {
     loadWalkMe(newState.snippet)
   }
