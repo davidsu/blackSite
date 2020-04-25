@@ -2,7 +2,7 @@
     "name": "walkme-developer-extension",
     "version": "1.0",
     "description": "",
-    "permissions": ["declarativeContent", "storage", "<all_urls>"],
+    "permissions": ["activeTab"],
     "browser_action": {
       "default_popup": "index.html",
       "default_icon": {
