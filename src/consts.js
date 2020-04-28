@@ -10,6 +10,8 @@ export const snippetFiles = {
     "(function() {var walkme = document.createElement('script'); walkme.type = 'text/javascript'; walkme.async = true; walkme.src = 'https://cdn.walkme.com/users/edfaa0e48b4c41d3a567ff38ecd325c8/test/walkme_edfaa0e48b4c41d3a567ff38ecd325c8_https.js'; var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(walkme, s); window._walkmeConfig = {smartLoad:true}; })();",
   "one resource only":
     "(function() { var walkme = document.createElement('script'); walkme.type = 'text/javascript'; walkme.async = true; walkme.src = 'https://cdn.walkme.com/users/c264518bbd75488f93a6bab1542e0ea8/walkme_c264518bbd75488f93a6bab1542e0ea8_https.js'; var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(walkme, s); window._walkmeConfig = { smartLoad: true }; })();",
+  multilingual:
+    "(function() {var walkme = document.createElement('script'); walkme.type = 'text/javascript'; walkme.async = true; walkme.src = 'https://cdn.walkme.com/users/45c7993c40a342aea3a52070ad52926b/test/walkme_45c7993c40a342aea3a52070ad52926b_https.js'; var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(walkme, s); window._walkmeConfig = {smartLoad:true}; })();",
   "end user IDP":
     "(function() {var walkme = document.createElement('script'); walkme.type = 'text/javascript'; walkme.async = true; walkme.src = 'https://cdn.walkmeqa.com/users/81eaa8a0981f4497959fa62e1b9264f3/test/walkme_81eaa8a0981f4497959fa62e1b9264f3_https.js'; var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(walkme, s); window._walkmeConfig = {smartLoad:true}; })();"
 }

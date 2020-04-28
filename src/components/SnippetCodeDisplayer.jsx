@@ -11,7 +11,6 @@ function getHtml(snippet) {
   const result = {
     __html: hljs.highlight("javascript", js_beautify(snippet)).value
   }
-  console.log(result)
   return result
 }
 

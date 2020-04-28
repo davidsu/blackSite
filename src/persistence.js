@@ -6,22 +6,25 @@ import {
 } from "./consts"
 import { sendMessage, isExtension } from "./extensiontUtils"
 
-const isLibExist = async url => {
-  try {
-    await fetch(url)
-    return true
-  } catch (e) {
-    return false
-  }
-}
+const isLibExist = url =>
+  new Promise(resolve => {
+    const request = new XMLHttpRequest()
+    request.open("get", url, true)
+    request.onreadystatechange = () => {
+      if (request.readyState === 4) {
+        resolve(request.status === 200 || request.status === 0)
+      }
+    }
+    request.send(null)
+  })
+
 const libVersionUrl = (libVersion, cdn = "cdn.walkme") =>
   `https://${cdn}.com/player/lib/walkme_lib_${libVersion}.js`
 async function getLibUrlByVersion(libVersion) {
-  const cdnUrl = isLibExist(libVersionUrl(libVersion))
-  const cdn2Url = isLibExist(libVersionUrl(libVersion, "cdn2.walkmedev"))
-  if (await cdn2Url) return libVersionUrl(libVersion, "cdn2.walkmedev")
-  if (await cdnUrl) return libVersionUrl(libVersion)
-  return libVersion
+  const dev2Url = libVersionUrl(libVersion, "cdn2.walkmedev")
+  const cdnUrl = libVersionUrl(libVersion)
+  if (await isLibExist(dev2Url)) return dev2Url
+  return cdnUrl
 }
 
 function getRealWalkmeUrl(libVersion) {
@@ -62,7 +65,7 @@ async function syncWalkmeUrl({ walkmeUrl }) {
     removeLocalStorage(customLibStorageKey)
   } else {
     updateLocalStorage(customLibStorageKey, realUrl)
-    const walkmeUrlRegex = /^(.*)(?:walkme_lib_|maketutorial_lib_)(\d{8}-\d{6}-\w{8})\.js/
+    const walkmeUrlRegex = /^(.*)(?:walkme_lib_|maketutorial_lib_)(\d{8}-\d{6}(?:-\w{8}){1,2})\.js/
     if (walkmeUrlRegex.test(realUrl)) {
       updateLocalStorage(
         customPublicPath,
