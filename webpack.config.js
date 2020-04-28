@@ -2,9 +2,8 @@ const HtmlWebPackPlugin = require("html-webpack-plugin")
 const CopyWebpackPlugin = require("copy-webpack-plugin")
 // const { BundleAnalyzerPlugin } = require("webpack-bundle-analyzer")
 
-const mode = process.env.NODE_ENV || "production"
 module.exports = {
-  mode,
+  mode: "production",
   devtool: "source-map",
   entry: {
     main: "./src/index.jsx",

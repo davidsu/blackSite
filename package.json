@@ -25,13 +25,13 @@
     "analyze-bundle": "webpack-bundle-analyzer dist/bundleanalyzerstats",
     "start": "webpack-dev-server --config=webpack.development.config.js --open",
     "build": "webpack --config=webpack.development.config.js",
-    "build:production": "NODE_ENV=production webpack",
+    "build:production": "webpack",
     "test": "jest",
     "lint": "eslint . --ext=js,jsx",
     "zipExtension": "rm extension.zip; zip -r extension.zip dist/",
-    "deploy:site": "npm run build:production && surge dist https://addicted-war.surge.sh/",
-    "prepare-extension-zip": "NODE_ENV=production npm run build && npm run zipExtension",
-    "deploy": "npm run prepare-extension-zip && npm run deploy:site"
+    "deploy:site": "rm -rf dist; npm run build:production && surge dist https://addicted-war.surge.sh/",
+    "prepare-extension-zip": "npm run build && npm run zipExtension",
+    "deploy": "npm run deploy:site && npm run prepare-extension-zip"
   },
   "devDependencies": {
     "@babel/core": "^7.9.0",
