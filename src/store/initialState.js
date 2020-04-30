@@ -3,7 +3,8 @@ import {
   snippetFiles,
   qaFeaturesKey,
   sources,
-  customLibStorageKey
+  customLibStorageKey,
+  localPrelibKey
 } from "../consts"
 
 function getInitialState() {
@@ -37,6 +38,7 @@ function getInitialState() {
     snippet: window.localStorage.getItem("snippet") || "",
     walkmeUrl,
     qaFeatures,
+    isUsingLocalPrelib: !!localStorage.getItem(localPrelibKey),
     customUserSettings: {
       url: localStorage.getItem("walkme_custom_user_settings_url"),
       env: localStorage.getItem("walkme_custom_user_settings_env"),

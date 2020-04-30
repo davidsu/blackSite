@@ -11,7 +11,8 @@ import {
   LoadWalkmeBtn,
   SnippetSelector,
   CustomUserSettings,
-  LoadSuperscriptButton
+  LoadSuperscriptButton,
+  IsLocalPrelib
 } from "./components"
 import { isExtension } from "./core"
 import "./App.css"
@@ -59,6 +60,10 @@ const App = () => (
           <WalkmeUrl />
           <br />
           <SnippetSelector />
+          <br />
+          <div style={{ textAlign: "left", color: "rgb(202, 189, 189)" }}>
+            <IsLocalPrelib />
+          </div>
           <CustomUserSettings />
           <FeaturesList />
           <br />

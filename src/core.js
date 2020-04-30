@@ -40,7 +40,8 @@ function shouldReloadWalkme(newState, oldState) {
     newState.snippet !== oldState.snippet ||
     newState.walkmeUrl !== oldState.walkmeUrl ||
     newState.customUserSettings !== oldState.customUserSettings ||
-    newState.qaFeature !== oldState.qaFeature
+    newState.qaFeature !== oldState.qaFeature ||
+    newState.isUsingLocalPrelib !== oldState.isUsingLocalPrelib
   )
 }
 

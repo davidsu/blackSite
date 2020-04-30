@@ -2,7 +2,9 @@ import {
   sources,
   customPublicPath,
   customLibStorageKey,
-  qaFeaturesKey
+  qaFeaturesKey,
+  localPrelibKey,
+  localPrelibUrl
 } from "./consts"
 import { sendMessage, isExtension } from "./extensiontUtils"
 
@@ -89,8 +91,17 @@ function syncQaFeatures({ qaFeatures }) {
   setLocalStorage(qaFeaturesKey, qaFeatures.join(" "))
 }
 
+function syncLocalPrelib({ isUsingLocalPrelib }) {
+  if (isUsingLocalPrelib) {
+    updateLocalStorage(localPrelibKey, localPrelibUrl)
+  } else {
+    removeLocalStorage(localPrelibKey)
+  }
+}
+
 async function syncStateToLocalStorage(state) {
   await syncWalkmeUrl(state)
+  syncLocalPrelib(state)
   syncSnippet(state)
   syncUserSettings(state)
   syncQaFeatures(state)

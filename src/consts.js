@@ -30,3 +30,5 @@ export const superScriptLoaderCode = `
 export const customLibStorageKey = "walkmeCustomeLibUrl"
 export const customPublicPath = "walkmePublicPath"
 export const qaFeaturesKey = "walkme_qa_features"
+export const localPrelibKey = "wm-prelibjs"
+export const localPrelibUrl = "https://localhost/lego/local_prelib.js"

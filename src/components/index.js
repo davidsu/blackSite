@@ -5,7 +5,8 @@ import {
   SET_CUSTOM_SETTINGS_ENV,
   SET_WALKME_URL,
   ADD_QA_FEATURE,
-  DELETE_QA_FEATURE
+  DELETE_QA_FEATURE,
+  SET_USING_LOCAL_PRELIB
 } from "../store/actionTypes"
 import { loadExternalConfig } from "../core"
 import WalkmeUrlComponent from "./WalkmeUrl"
@@ -15,6 +16,7 @@ import CustomUserSettingsComponent from "./CustomUserSettings"
 import LoadSuperscriptButton from "./LoadSuperscriptButton"
 import FeaturesListComponent from "./FeaturesList"
 import DumpConfigurationComponent from "./DumpConfiguration"
+import IsLocalPrelibComponent from "./IsLocalPrelib"
 
 function mapWalkmeUrlToKey({ walkmeUrl }) {
   const walkmeUrlKey = walkmeUrl.url
@@ -72,6 +74,15 @@ const mapStateToSnippet = ({ snippet, snippetFiles }) => ({
   snippetFiles
 })
 const SnippetSelector = connect(mapStateToSnippet)(SnippetSelectorComponent)
+
+const IsLocalPrelib = connect(
+  ({ isUsingLocalPrelib }) => ({ isUsingLocalPrelib }),
+  dispatch => ({
+    setLocalPrelib: payload =>
+      dispatch({ type: SET_USING_LOCAL_PRELIB, payload })
+  })
+)(IsLocalPrelibComponent)
+
 export {
   LoadWalkmeBtn,
   SnippetSelector,
@@ -79,5 +90,6 @@ export {
   CustomUserSettings,
   LoadSuperscriptButton,
   FeaturesList,
-  DumpConfiguration
+  DumpConfiguration,
+  IsLocalPrelib
 }

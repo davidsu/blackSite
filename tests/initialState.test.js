@@ -10,6 +10,7 @@ describe("initialState", () => {
     const expected = {
       snippet: "dummySnippet",
       snippetFiles,
+      isUsingLocalPrelib: false,
       walkmeUrl: {
         url: "static",
         sources: Object.keys(sources).sort()
@@ -34,6 +35,7 @@ describe("initialState", () => {
     const expected = {
       snippet: "",
       snippetFiles,
+      isUsingLocalPrelib: false,
       walkmeUrl: {
         url,
         sources: [...Object.keys(sources), url].sort()
