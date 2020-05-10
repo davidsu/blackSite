@@ -1,3 +1,4 @@
+import throttle from "lodash/throttle"
 import { store } from "./store"
 import { getInitialState } from "./store/initialState"
 import { superScriptLoaderCode } from "./consts"
@@ -18,7 +19,8 @@ function evalCode(funcName, code) {
     } catch {}
   }
 }
-function loadWalkMe(snippetArg) {
+
+const loadWalkMe = throttle(snippetArg => {
   if (!isExtension() && !--reloadWalkmeCountDown) {
     location.reload() // eslint-disable-line no-restricted-globals
   }
@@ -28,7 +30,7 @@ function loadWalkMe(snippetArg) {
       ? snippetArg
       : store.getState().snippet || store.getState().snippetFiles.snippetOnPage
   evalCode("loadWalkMe", snippet)
-}
+}, 600)
 
 function loadSuperscript() {
   evalCode("evalCode", superScriptLoaderCode)
@@ -41,7 +43,8 @@ function shouldReloadWalkme(newState, oldState) {
     newState.walkmeUrl !== oldState.walkmeUrl ||
     newState.customUserSettings !== oldState.customUserSettings ||
     newState.qaFeature !== oldState.qaFeature ||
-    newState.isUsingLocalPrelib !== oldState.isUsingLocalPrelib
+    newState.isUsingLocalPrelib !== oldState.isUsingLocalPrelib ||
+    newState.isReduxStackTraceOn !== oldState.isReduxStackTraceOn
   )
 }
 

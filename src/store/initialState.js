@@ -4,7 +4,8 @@ import {
   qaFeaturesKey,
   sources,
   customLibStorageKey,
-  localPrelibKey
+  localPrelibKey,
+  reduxStackTraceKey
 } from "../consts"
 
 function getInitialState() {
@@ -39,6 +40,7 @@ function getInitialState() {
     walkmeUrl,
     qaFeatures,
     isUsingLocalPrelib: !!localStorage.getItem(localPrelibKey),
+    isReduxStackTraceOn: !!localStorage.getItem(reduxStackTraceKey),
     customUserSettings: {
       url: localStorage.getItem("walkme_custom_user_settings_url"),
       env: localStorage.getItem("walkme_custom_user_settings_env"),

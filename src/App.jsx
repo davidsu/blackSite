@@ -12,7 +12,8 @@ import {
   SnippetSelector,
   CustomUserSettings,
   LoadSuperscriptButton,
-  IsLocalPrelib
+  IsLocalPrelib,
+  EnableReduxStackTrace
 } from "./components"
 import { isExtension } from "./core"
 import "./App.css"
@@ -63,6 +64,7 @@ const App = () => (
           <br />
           <div style={{ textAlign: "left", color: "rgb(202, 189, 189)" }}>
             <IsLocalPrelib />
+            <EnableReduxStackTrace />
           </div>
           <CustomUserSettings />
           <FeaturesList />

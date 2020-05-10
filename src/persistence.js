@@ -4,6 +4,7 @@ import {
   customLibStorageKey,
   qaFeaturesKey,
   localPrelibKey,
+  reduxStackTraceKey,
   localPrelibUrl
 } from "./consts"
 import { sendMessage, isExtension } from "./extensiontUtils"
@@ -99,9 +100,18 @@ function syncLocalPrelib({ isUsingLocalPrelib }) {
   }
 }
 
+function syncReduxStackTrace({ isReduxStackTraceOn }) {
+  if (isReduxStackTraceOn) {
+    updateLocalStorage(reduxStackTraceKey, "yes")
+  } else {
+    removeLocalStorage(reduxStackTraceKey)
+  }
+}
+
 async function syncStateToLocalStorage(state) {
   await syncWalkmeUrl(state)
   syncLocalPrelib(state)
+  syncReduxStackTrace(state)
   syncSnippet(state)
   syncUserSettings(state)
   syncQaFeatures(state)

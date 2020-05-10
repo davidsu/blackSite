@@ -6,7 +6,8 @@ import {
   SET_WALKME_URL,
   ADD_QA_FEATURE,
   DELETE_QA_FEATURE,
-  SET_USING_LOCAL_PRELIB
+  SET_USING_LOCAL_PRELIB,
+  SET_USING_REDUX_STACK_TRACE
 } from "../store/actionTypes"
 import { loadExternalConfig } from "../core"
 import WalkmeUrlComponent from "./WalkmeUrl"
@@ -17,6 +18,7 @@ import LoadSuperscriptButton from "./LoadSuperscriptButton"
 import FeaturesListComponent from "./FeaturesList"
 import DumpConfigurationComponent from "./DumpConfiguration"
 import IsLocalPrelibComponent from "./IsLocalPrelib"
+import EnableReduxStackTraceComponent from "./EnableReduxStackTrace"
 
 function mapWalkmeUrlToKey({ walkmeUrl }) {
   const walkmeUrlKey = walkmeUrl.url
@@ -75,6 +77,13 @@ const mapStateToSnippet = ({ snippet, snippetFiles }) => ({
 })
 const SnippetSelector = connect(mapStateToSnippet)(SnippetSelectorComponent)
 
+const EnableReduxStackTrace = connect(
+  ({ isReduxStackTraceOn }) => ({ isReduxStackTraceOn }),
+  dispatch => ({
+    setReduxStackTrace: payload =>
+      dispatch({ type: SET_USING_REDUX_STACK_TRACE, payload })
+  })
+)(EnableReduxStackTraceComponent)
 const IsLocalPrelib = connect(
   ({ isUsingLocalPrelib }) => ({ isUsingLocalPrelib }),
   dispatch => ({
@@ -91,5 +100,6 @@ export {
   LoadSuperscriptButton,
   FeaturesList,
   DumpConfiguration,
-  IsLocalPrelib
+  IsLocalPrelib,
+  EnableReduxStackTrace
 }
