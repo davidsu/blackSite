@@ -30,7 +30,7 @@
     "lint": "eslint . --ext=js,jsx",
     "zipExtension": "rm extension.zip; zip -r extension.zip dist/",
     "deploy:site": "rm -rf dist; npm run build:production && surge dist https://addicted-war.surge.sh/",
-    "prepare-extension-zip": "npm run build && npm run zipExtension",
+    "prepare-extension-zip": "NO_SOURCE_MAP=true npm run build:production && npm run zipExtension",
     "deploy": "npm run deploy:site && npm run prepare-extension-zip"
   },
   "devDependencies": {
