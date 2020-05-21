@@ -9,7 +9,7 @@ function sendMessage(msg, cb) {
 
 function getInitialStateFromInsideExtension() {
   const file = "runInPage.js"
-  chrome.tabs.executeScript({ file }, () =>
+  chrome.tabs.executeScript({ file, allFrames: true }, () =>
     sendMessage("getInitialState", response => {
       if (response) {
         store.dispatch({ type: INITIALIZE, payload: response })
