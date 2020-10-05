@@ -9,7 +9,8 @@ import {
   ADD_QA_FEATURE,
   DELETE_QA_FEATURE,
   SET_USING_LOCAL_PRELIB,
-  SET_USING_REDUX_STACK_TRACE
+  SET_USING_REDUX_STACK_TRACE,
+  SET_LOCAL_ACTION_BOT
 } from "./actionTypes"
 import { getInitialState } from "./initialState"
 import { sources } from "../consts"
@@ -75,6 +76,13 @@ const isReduxStackTraceOn = createReducer(
   false
 )
 
+const isLocalActionBot = createReducer(
+  {
+    [SET_LOCAL_ACTION_BOT]: (state, { payload }) => payload
+  },
+  false
+)
+
 const combinedReducers = combineReducers({
   customUserSettings,
   qaFeatures,
@@ -82,7 +90,8 @@ const combinedReducers = combineReducers({
   walkmeUrl,
   snippetFiles,
   isUsingLocalPrelib,
-  isReduxStackTraceOn
+  isReduxStackTraceOn,
+  isLocalActionBot
 })
 const rootReducer = (state = getInitialState(), action) => {
   // eslint-disable-next-line

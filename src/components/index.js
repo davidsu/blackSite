@@ -7,7 +7,8 @@ import {
   ADD_QA_FEATURE,
   DELETE_QA_FEATURE,
   SET_USING_LOCAL_PRELIB,
-  SET_USING_REDUX_STACK_TRACE
+  SET_USING_REDUX_STACK_TRACE,
+  SET_LOCAL_ACTION_BOT
 } from "../store/actionTypes"
 import { loadExternalConfig } from "../core"
 import WalkmeUrlComponent from "./WalkmeUrl"
@@ -19,6 +20,7 @@ import FeaturesListComponent from "./FeaturesList"
 import DumpConfigurationComponent from "./DumpConfiguration"
 import IsLocalPrelibComponent from "./IsLocalPrelib"
 import EnableReduxStackTraceComponent from "./EnableReduxStackTrace"
+import LocalActionBotComponent from './LocalActionBot'
 
 function mapWalkmeUrlToKey({ walkmeUrl }) {
   const walkmeUrlKey = walkmeUrl.url
@@ -84,6 +86,15 @@ const EnableReduxStackTrace = connect(
       dispatch({ type: SET_USING_REDUX_STACK_TRACE, payload })
   })
 )(EnableReduxStackTraceComponent)
+
+const LocalActionBot = connect(
+  ({ isLocalActionBot }) => ({ isLocalActionBot }),
+  dispatch => ({
+    setLocalActionBot: payload =>
+      dispatch({ type: SET_LOCAL_ACTION_BOT, payload })
+  })
+)(LocalActionBotComponent)
+
 const IsLocalPrelib = connect(
   ({ isUsingLocalPrelib }) => ({ isUsingLocalPrelib }),
   dispatch => ({
@@ -93,6 +104,7 @@ const IsLocalPrelib = connect(
 )(IsLocalPrelibComponent)
 
 export {
+  LocalActionBot,
   LoadWalkmeBtn,
   SnippetSelector,
   WalkmeUrl,

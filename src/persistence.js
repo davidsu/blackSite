@@ -5,7 +5,9 @@ import {
   qaFeaturesKey,
   localPrelibKey,
   reduxStackTraceKey,
-  localPrelibUrl
+  localPrelibUrl,
+  localActionBotKey,
+  localActionBotUrl
 } from "./consts"
 import { sendMessage, isExtension } from "./extensiontUtils"
 
@@ -108,8 +110,17 @@ function syncReduxStackTrace({ isReduxStackTraceOn }) {
   }
 }
 
+function syncLocalActionBot({ isLocalActionBot }) {
+  if (isLocalActionBot) {
+    updateLocalStorage(localActionBotKey, localActionBotUrl)
+  } else {
+    removeLocalStorage(localActionBotKey)
+  }
+}
+
 async function syncStateToLocalStorage(state) {
   await syncWalkmeUrl(state)
+  syncLocalActionBot(state)
   syncLocalPrelib(state)
   syncReduxStackTrace(state)
   syncSnippet(state)

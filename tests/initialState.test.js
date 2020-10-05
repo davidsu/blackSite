@@ -12,6 +12,7 @@ describe("initialState", () => {
       snippetFiles,
       isUsingLocalPrelib: false,
       isReduxStackTraceOn: false,
+      isLocalActionBot: false,
       walkmeUrl: {
         url: "static",
         sources: Object.keys(sources).sort()
@@ -38,6 +39,7 @@ describe("initialState", () => {
       snippetFiles,
       isReduxStackTraceOn: false,
       isUsingLocalPrelib: false,
+      isLocalActionBot: false,
       walkmeUrl: {
         url,
         sources: [...Object.keys(sources), url].sort()
