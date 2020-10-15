@@ -7,6 +7,7 @@ import {
   localPrelibKey,
   reduxStackTraceKey,
   localActionBotKey,
+  localActionBotServerKey
 } from "../consts"
 
 function getInitialState() {
@@ -43,6 +44,7 @@ function getInitialState() {
     isUsingLocalPrelib: !!localStorage.getItem(localPrelibKey),
     isReduxStackTraceOn: !!localStorage.getItem(reduxStackTraceKey),
     isLocalActionBot: !!localStorage.getItem(localActionBotKey),
+    isLocalActionBotServer: !!localStorage.getItem(localActionBotServerKey),
     customUserSettings: {
       url: localStorage.getItem("walkme_custom_user_settings_url"),
       env: localStorage.getItem("walkme_custom_user_settings_env"),

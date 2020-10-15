@@ -8,7 +8,8 @@ import {
   DELETE_QA_FEATURE,
   SET_USING_LOCAL_PRELIB,
   SET_USING_REDUX_STACK_TRACE,
-  SET_LOCAL_ACTION_BOT
+  SET_LOCAL_ACTION_BOT,
+  SET_LOCAL_ACTION_BOT_SERVER
 } from "../store/actionTypes"
 import { loadExternalConfig } from "../core"
 import WalkmeUrlComponent from "./WalkmeUrl"
@@ -20,7 +21,8 @@ import FeaturesListComponent from "./FeaturesList"
 import DumpConfigurationComponent from "./DumpConfiguration"
 import IsLocalPrelibComponent from "./IsLocalPrelib"
 import EnableReduxStackTraceComponent from "./EnableReduxStackTrace"
-import LocalActionBotComponent from './LocalActionBot'
+import LocalActionBotComponent from "./LocalActionBot"
+import LocalActionBotServerComponent from "./LocalActionBotServer"
 
 function mapWalkmeUrlToKey({ walkmeUrl }) {
   const walkmeUrlKey = walkmeUrl.url
@@ -95,6 +97,14 @@ const LocalActionBot = connect(
   })
 )(LocalActionBotComponent)
 
+const LocalActionBotServer = connect(
+  ({ isLocalActionBotServer }) => ({ isLocalActionBotServer }),
+  dispatch => ({
+    setLocalActionBotServer: payload =>
+      dispatch({ type: SET_LOCAL_ACTION_BOT_SERVER, payload })
+  })
+)(LocalActionBotServerComponent)
+
 const IsLocalPrelib = connect(
   ({ isUsingLocalPrelib }) => ({ isUsingLocalPrelib }),
   dispatch => ({
@@ -113,5 +123,6 @@ export {
   FeaturesList,
   DumpConfiguration,
   IsLocalPrelib,
-  EnableReduxStackTrace
+  EnableReduxStackTrace,
+  LocalActionBotServer
 }

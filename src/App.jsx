@@ -11,6 +11,7 @@ import {
   LoadWalkmeBtn,
   SnippetSelector,
   LocalActionBot,
+  LocalActionBotServer,
   CustomUserSettings,
   LoadSuperscriptButton,
   IsLocalPrelib,
@@ -66,9 +67,9 @@ const App = () => (
           <div style={{ textAlign: "left", color: "rgb(202, 189, 189)" }}>
             <IsLocalPrelib />
             <EnableReduxStackTrace />
-            <br/>
+            <br />
             <LocalActionBot />
-
+            <LocalActionBotServer />
           </div>
           <CustomUserSettings />
           <FeaturesList />

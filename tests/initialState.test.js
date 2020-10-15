@@ -13,6 +13,7 @@ describe("initialState", () => {
       isUsingLocalPrelib: false,
       isReduxStackTraceOn: false,
       isLocalActionBot: false,
+      isLocalActionBotServer: false,
       walkmeUrl: {
         url: "static",
         sources: Object.keys(sources).sort()
@@ -40,6 +41,7 @@ describe("initialState", () => {
       isReduxStackTraceOn: false,
       isUsingLocalPrelib: false,
       isLocalActionBot: false,
+      isLocalActionBotServer: false,
       walkmeUrl: {
         url,
         sources: [...Object.keys(sources), url].sort()

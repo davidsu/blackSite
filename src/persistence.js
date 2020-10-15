@@ -7,7 +7,9 @@ import {
   reduxStackTraceKey,
   localPrelibUrl,
   localActionBotKey,
-  localActionBotUrl
+  localActionBotUrl,
+  localActionBotServerKey,
+  localActionBotServerUrl
 } from "./consts"
 import { sendMessage, isExtension } from "./extensiontUtils"
 
@@ -118,9 +120,18 @@ function syncLocalActionBot({ isLocalActionBot }) {
   }
 }
 
+function syncLocalActionBotServer({ isLocalActionBotServer }) {
+  if (isLocalActionBotServer) {
+    updateLocalStorage(localActionBotServerKey, localActionBotServerUrl)
+  } else {
+    removeLocalStorage(localActionBotServerKey)
+  }
+}
+
 async function syncStateToLocalStorage(state) {
   await syncWalkmeUrl(state)
   syncLocalActionBot(state)
+  syncLocalActionBotServer(state)
   syncLocalPrelib(state)
   syncReduxStackTrace(state)
   syncSnippet(state)
