@@ -11,7 +11,7 @@
     "@material-ui/icons": "^4.9.1",
     "@material-ui/lab": "^4.0.0-alpha.45",
     "@material-ui/styles": "^4.9.0",
-    "highlight.js": "^9.18.1",
+    "highlight.js": "^10.1.2",
     "js-beautify": "^1.11.0",
     "lodash": "^4.17.15",
     "react": "^16.13.1",
