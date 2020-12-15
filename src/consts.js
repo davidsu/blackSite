@@ -6,6 +6,8 @@ export const sources = {
 }
 
 export const snippetFiles = {
+  davidsuQA:
+    "(function() {var walkme = document.createElement('script'); walkme.type = 'text/javascript'; walkme.async = true; walkme.src = 'https://cdn.walkmeqa.com/users/2aff9fa83c8d4412aca0c560722aa28a/test/walkme_2aff9fa83c8d4412aca0c560722aa28a_https.js'; var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(walkme, s); window._walkmeConfig = {smartLoad:true}; })();",
   "davidsu working snippet":
     "(function() {var walkme = document.createElement('script'); walkme.type = 'text/javascript'; walkme.async = true; walkme.src = 'https://cdn.walkme.com/users/edfaa0e48b4c41d3a567ff38ecd325c8/walkme_edfaa0e48b4c41d3a567ff38ecd325c8_https.js'; var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(walkme, s); window._walkmeConfig = {smartLoad:true}; })();",
   "one resource only":
